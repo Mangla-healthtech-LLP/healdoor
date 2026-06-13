@@ -1,0 +1,26 @@
+{
+  "name": "healdoor-lz",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.34.3",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.8.4",
+    "turbo": "^2.3.3"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.6.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module"
+}
