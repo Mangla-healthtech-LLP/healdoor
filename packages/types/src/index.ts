@@ -3,3 +3,5 @@ export interface Service {
   title: string
   slug: string
 }
+
+export * from './auth'
