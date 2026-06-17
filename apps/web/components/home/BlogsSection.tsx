@@ -1,4 +1,5 @@
 import { ArrowRight, Calendar } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const blogs = [
@@ -49,10 +50,11 @@ export function BlogsSection() {
               className="group bg-white rounded-2xl overflow-hidden border border-border/30 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
             >
               <div className="aspect-video relative overflow-hidden">
-                <img
+                <Image
                   src={blog.image}
                   alt={blog.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-4 space-y-3">

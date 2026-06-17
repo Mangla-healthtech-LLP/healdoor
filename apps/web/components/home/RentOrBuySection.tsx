@@ -7,6 +7,7 @@ import {
   Star,
   Check,
 } from "lucide-react";
+import Image from "next/image";
 
 const rentProducts = [
   { name: "Oxygen Concentrator", price: "₹1,499", unit: "/month", rating: 4.8, image: "/images/service-oxygen.png" },
@@ -85,10 +86,11 @@ export function RentOrBuySection() {
               className="bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
             >
               <div className="aspect-[4/3] bg-section-alt-bg relative overflow-hidden">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-3 space-y-2">

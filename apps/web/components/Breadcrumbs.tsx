@@ -8,34 +8,18 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
+  dark?: boolean;
 }
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, dark = false }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className="bg-white border-b border-border/30">
-      <div className="container py-3">
+    <nav aria-label="Breadcrumb" className={`${dark ? '' : 'bg-white border-b border-border/30'}`}>
+      <div className={`container py-3 ${dark ? 'px-0' : ''}`}>
         <ol
-          className="flex items-center gap-1.5 text-sm text-text-muted flex-wrap"
+          className={`flex items-center gap-1.5 text-sm flex-wrap ${dark ? 'text-white/70' : 'text-text-muted'}`}
           itemScope
           itemType="https://schema.org/BreadcrumbList"
         >
-          <li
-            className="flex items-center gap-1.5"
-            itemProp="itemListElement"
-            itemScope
-            itemType="https://schema.org/ListItem"
-          >
-            <Link
-              href="/"
-              className="flex items-center gap-1 hover:text-teal transition-colors"
-              itemProp="item"
-            >
-              <Home className="h-3.5 w-3.5" />
-              <span itemProp="name">Home</span>
-            </Link>
-            <meta itemProp="position" content="1" />
-          </li>
-
           {items.map((item, index) => (
             <li
               key={index}
@@ -44,17 +28,26 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
               itemScope
               itemType="https://schema.org/ListItem"
             >
-              <ChevronRight className="h-3.5 w-3.5 text-border" />
-              {item.href ? (
+              {index > 0 && <ChevronRight className={`h-3.5 w-3.5 ${dark ? 'text-white/40' : 'text-border'}`} />}
+              {index === 0 ? (
+                <Link
+                  href={item.href || '/'}
+                  className={`flex items-center gap-1 transition-colors ${dark ? 'hover:text-white' : 'hover:text-teal'}`}
+                  itemProp="item"
+                >
+                  <Home className="h-3.5 w-3.5" />
+                  <span itemProp="name">{item.label}</span>
+                </Link>
+              ) : item.href ? (
                 <Link
                   href={item.href}
-                  className="hover:text-teal transition-colors"
+                  className={`transition-colors ${dark ? 'hover:text-white' : 'hover:text-teal'}`}
                   itemProp="item"
                 >
                   <span itemProp="name">{item.label}</span>
                 </Link>
               ) : (
-                <span className="text-text-dark font-medium" itemProp="name">
+                <span className={`font-medium ${dark ? 'text-white' : 'text-text-dark'}`} itemProp="name">
                   {item.label}
                 </span>
               )}

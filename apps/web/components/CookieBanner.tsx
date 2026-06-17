@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import Link from "next/link";
 import { Button } from "./ui/button";
 
 const COOKIE_CONSENT_EVENT = "cookieConsentChange";
@@ -38,7 +39,7 @@ export function CookieBanner() {
       <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground text-center sm:text-left">
           We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies and our {" "}
-          <a href="/terms-and-conditions" className="underline hover:text-primary">Terms & Conditions</a>.
+          <Link href="/terms-and-conditions" className="underline hover:text-primary">Terms & Conditions</Link>.
         </p>
         <div className="flex gap-2">
           <Button

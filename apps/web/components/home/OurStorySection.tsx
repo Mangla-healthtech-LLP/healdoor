@@ -1,5 +1,4 @@
 import {
-  Award,
   GraduationCap,
   Briefcase,
   BadgeCheck,

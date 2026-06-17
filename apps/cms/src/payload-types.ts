@@ -140,6 +140,9 @@ export interface User {
   role: 'super-admin' | 'admin' | 'editor' | 'viewer';
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -284,27 +287,103 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
+  status?: ('draft' | 'published') | null;
+  publishedAt?: string | null;
   page_builder?:
-    | {
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
+    | (
+        | {
+            heading: string;
+            subHeading?: string | null;
+            primaryButtonText?: string | null;
+            primaryButtonLink?: string | null;
+            secondaryButtonText?: string | null;
+            secondaryButtonLink?: string | null;
+            backgroundImage?: (number | null) | Media;
+            alignment?: ('left' | 'center' | 'right') | null;
+            showStats?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            title: string;
+            description?: string | null;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            backgroundColor?: ('teal' | 'white' | 'dark') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            features?:
+              | {
+                  /**
+                   * Lucide icon name (e.g., Check, Star, Heart)
+                   */
+                  icon?: string | null;
+                  title: string;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'feature';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            faqItems?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            sectionTitle?: string | null;
+            testimonialItems?:
+              | {
+                  name: string;
+                  designation?: string | null;
+                  rating?: number | null;
+                  photo?: (number | null) | Media;
+                  review: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonial';
+          }
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
               [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'content';
-      }[]
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+      )[]
     | null;
   seo?: {
     meta_title?: string | null;
@@ -480,6 +559,9 @@ export interface UsersSelect<T extends boolean = true> {
   role?: T;
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
@@ -566,13 +648,89 @@ export interface LeadsSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  status?: T;
+  publishedAt?: T;
   page_builder?:
     | T
     | {
-        content?:
+        hero?:
           | T
           | {
-              richText?: T;
+              heading?: T;
+              subHeading?: T;
+              primaryButtonText?: T;
+              primaryButtonLink?: T;
+              secondaryButtonText?: T;
+              secondaryButtonLink?: T;
+              backgroundImage?: T;
+              alignment?: T;
+              showStats?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              buttonText?: T;
+              buttonLink?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        feature?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              features?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              faqItems?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        testimonial?:
+          | T
+          | {
+              sectionTitle?: T;
+              testimonialItems?:
+                | T
+                | {
+                    name?: T;
+                    designation?: T;
+                    rating?: T;
+                    photo?: T;
+                    review?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
               id?: T;
               blockName?: T;
             };

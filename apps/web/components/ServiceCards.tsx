@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, MessageSquare, ClipboardPlus, Activity, Wind, BedDouble, Stethoscope, Microscope, Accessibility } from "lucide-react";
+import { Phone, MessageSquare, ClipboardPlus, Activity, Wind, BedDouble, Stethoscope, Accessibility } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";

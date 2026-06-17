@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Star, ShoppingCart } from "lucide-react";
+import Image from "next/image";
 
 const products = [
   {
@@ -135,10 +136,11 @@ export function HighestSellingProducts() {
             >
               {/* Image */}
               <div className="aspect-square bg-section-alt-bg relative overflow-hidden">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               {/* Content */}

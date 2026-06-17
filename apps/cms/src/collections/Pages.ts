@@ -1,7 +1,18 @@
 import type { CollectionConfig } from 'payload'
+import {
+  HeroBlock,
+  CTABlock,
+  FeatureBlock,
+  FAQBlock,
+  TestimonialBlock,
+  RichTextBlock,
+} from '../blocks'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
   },
@@ -19,19 +30,25 @@ export const Pages: CollectionConfig = {
       index: true,
     },
     {
+      name: 'status',
+      type: 'select',
+      options: ['draft', 'published'],
+      defaultValue: 'draft',
+    },
+    {
+      name: 'publishedAt',
+      type: 'date',
+    },
+    {
       name: 'page_builder',
       type: 'blocks',
       blocks: [
-        // Extend with custom blocks here later
-        {
-          slug: 'content',
-          fields: [
-            {
-              name: 'richText',
-              type: 'richText',
-            },
-          ],
-        },
+        HeroBlock,
+        CTABlock,
+        FeatureBlock,
+        FAQBlock,
+        TestimonialBlock,
+        RichTextBlock,
       ],
     },
     {

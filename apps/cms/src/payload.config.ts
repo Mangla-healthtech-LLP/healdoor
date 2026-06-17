@@ -49,7 +49,8 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
     },
   }),
-  sharp,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sharp: sharp as any,
   plugins: [
     ...(process.env.AWS_S3_BUCKET
       ? [

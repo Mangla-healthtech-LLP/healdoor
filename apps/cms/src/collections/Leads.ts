@@ -16,7 +16,7 @@ export const Leads: CollectionConfig = {
       name: 'mobile',
       type: 'text',
       required: true,
-      validate: (val) => {
+      validate: (val: string | null | undefined) => {
         if (!val) return 'Mobile number is required'
         const regex = /^\+[1-9]\d{7,14}$/
         if (!regex.test(val)) return 'Invalid mobile number format (must be E.164)'

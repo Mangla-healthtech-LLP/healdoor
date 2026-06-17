@@ -1,4 +1,5 @@
 import { User, Calendar, HeartPulse, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export function BeforeAfterSection() {
   return (
@@ -16,10 +17,11 @@ export function BeforeAfterSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto items-center">
           {/* Before */}
           <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md">
-            <img
+            <Image
               src="/images/service-icu.png"
               alt="Before — patient in need of care"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4">
@@ -31,10 +33,11 @@ export function BeforeAfterSection() {
 
           {/* After */}
           <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md">
-            <img
+            <Image
               src="/images/service-physio.png"
               alt="After — patient recovered with HealDoor care"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4">

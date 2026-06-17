@@ -1,6 +1,6 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
-export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
    CREATE TYPE "public"."enum_users_role" AS ENUM('super-admin', 'admin', 'editor', 'viewer');
   ALTER TABLE "users" ADD COLUMN "first_name" varchar NOT NULL;
@@ -8,7 +8,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "users" ADD COLUMN "role" "enum_users_role" DEFAULT 'viewer' NOT NULL;`)
 }
 
-export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+export async function down({ db, payload: _payload, req: _req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    ALTER TABLE "users" DROP COLUMN "first_name";
   ALTER TABLE "users" DROP COLUMN "last_name";
