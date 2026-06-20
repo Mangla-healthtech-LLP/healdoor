@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Star, ShoppingCart, Calendar } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { ProductGridBlockData } from "@healdoor/types";
 import { getMediaUrl, getMediaAlt } from "@healdoor/utils";
 
@@ -72,9 +73,10 @@ export function ProductGridBlock({
               mode === "rent" ? product.rentPrice : product.buyPrice;
 
             return (
-              <div
+              <Link
                 key={product.id || i}
-                className="bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+                href={`/products/${product.slug}`}
+                className="block bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
               >
                 <div className="aspect-square bg-section-alt-bg relative overflow-hidden">
                   <Image
@@ -111,7 +113,7 @@ export function ProductGridBlock({
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
