@@ -467,6 +467,12 @@ export interface Product {
    */
   buyPrice?: number | null;
   rating?: number | null;
+  ratingCount?: number | null;
+  rating5Star?: number | null;
+  rating4Star?: number | null;
+  rating3Star?: number | null;
+  rating2Star?: number | null;
+  rating1Star?: number | null;
   category?: ('oxygen' | 'respiratory' | 'icu' | 'mobility' | 'monitoring' | 'other') | null;
   /**
    * Show in "Highest Selling Products" section
@@ -478,6 +484,33 @@ export interface Product {
    * Lower numbers appear first
    */
   sortOrder?: number | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  faqs?: (number | Faq)[] | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    canonical?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -976,11 +1009,32 @@ export interface ProductsSelect<T extends boolean = true> {
   rentPrice?: T;
   buyPrice?: T;
   rating?: T;
+  ratingCount?: T;
+  rating5Star?: T;
+  rating4Star?: T;
+  rating3Star?: T;
+  rating2Star?: T;
+  rating1Star?: T;
   category?: T;
   isFeatured?: T;
   isAvailableForRent?: T;
   isAvailableForPurchase?: T;
   sortOrder?: T;
+  description?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  faqs?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        canonical?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -78,6 +78,13 @@ export async function getProducts(params?: {
   return fetchPayload<PayloadResponse<Product>>(query)
 }
 
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const data = await fetchPayload<PayloadResponse<Product>>(
+    `/products?where[slug][equals]=${slug}&depth=2&limit=1`
+  )
+  return data.docs[0] ?? null
+}
+
 export async function getFeaturedProducts(): Promise<Product[]> {
   const data = await fetchPayload<PayloadResponse<Product>>(
     `/products?where[isFeatured][equals]=true&depth=1&limit=20&sort=sortOrder`
