@@ -11,7 +11,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import { Logo } from "@healdoor/ui";
 
 const servicesDropdown = [
   { label: "Physio at Home", href: "/physiotherapy" },
@@ -90,13 +90,11 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white backdrop-blur supports-[backdrop-filter]:bg-white border-b border-border/50 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full bg-white backdrop-blur supports-[backdrop-filter]:bg-whitebg-gradient-to-br border-b border-border/50 shadow-sm">
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-          <Image
-            src="/logo_white_bg.svg"
-            alt="HealDoor Logo"
+          <Logo
             width={160}
             height={60}
             className="w-auto h-12"

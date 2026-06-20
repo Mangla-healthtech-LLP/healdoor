@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { IUser } from '@healdoor/types'
-import { getCurrentUser } from '../lib/auth'
+import { getCurrentUser } from '@/lib/auth'
 
 interface AuthContextType {
   user: IUser | null

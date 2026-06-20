@@ -145,3 +145,6 @@ vite.config.ts.timestamp-*
 
 .turbo
 docs
+
+.gemini
+GEMINI.md

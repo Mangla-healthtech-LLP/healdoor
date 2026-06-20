@@ -20,6 +20,9 @@ importers:
 
   apps/cms:
     dependencies:
+      '@healdoor/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@payloadcms/db-postgres':
         specifier: 3.85.1
         version: 3.85.1(payload@3.85.1(graphql@16.14.2)(typescript@5.7.3))
@@ -117,6 +120,9 @@ importers:
       '@healdoor/types':
         specifier: workspace:*
         version: link:../../packages/types
+      '@healdoor/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@healdoor/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -221,6 +227,22 @@ importers:
     devDependencies:
       typescript:
         specifier: ^5.0.0
+        version: 5.7.3
+
+  packages/ui:
+    dependencies:
+      next:
+        specifier: 16.2.6
+        version: 16.2.6(@playwright/test@1.58.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4)
+      react:
+        specifier: 19.2.6
+        version: 19.2.6
+    devDependencies:
+      '@healdoor/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      typescript:
+        specifier: 5.7.3
         version: 5.7.3
 
   packages/utils:
@@ -10069,6 +10091,32 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+  next@16.2.6(@playwright/test@1.58.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4):
+    dependencies:
+      '@next/env': 16.2.6
+      '@swc/helpers': 0.5.15
+      baseline-browser-mapping: 2.10.36
+      caniuse-lite: 1.0.30001799
+      postcss: 8.4.31
+      react: 19.2.6
+      react-dom: 19.2.6(react@19.2.6)
+      styled-jsx: 5.1.6(react@19.2.6)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 16.2.6
+      '@next/swc-darwin-x64': 16.2.6
+      '@next/swc-linux-arm64-gnu': 16.2.6
+      '@next/swc-linux-arm64-musl': 16.2.6
+      '@next/swc-linux-x64-gnu': 16.2.6
+      '@next/swc-linux-x64-musl': 16.2.6
+      '@next/swc-win32-arm64-msvc': 16.2.6
+      '@next/swc-win32-x64-msvc': 16.2.6
+      '@playwright/test': 1.58.2
+      sass: 1.77.4
+      sharp: 0.34.5
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
   next@16.2.9(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4):
     dependencies:
       '@next/env': 16.2.9
@@ -10912,6 +10960,11 @@ snapshots:
     dependencies:
       client-only: 0.0.1
       react: 19.2.4
+
+  styled-jsx@5.1.6(react@19.2.6):
+    dependencies:
+      client-only: 0.0.1
+      react: 19.2.6
 
   stylis@4.2.0: {}
 

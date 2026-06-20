@@ -23,6 +23,10 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    meta: {
+      titleSuffix: '- Healdoor CMS',
+      icons: [{ url: '/favicon.ico' }],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },

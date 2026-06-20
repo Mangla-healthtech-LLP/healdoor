@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@healdoor/ui": "workspace:*",
     "@healdoor/types": "workspace:*",
     "@healdoor/utils": "workspace:*",
     "@hookform/resolvers": "^5.4.0",

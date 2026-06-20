@@ -1,16 +1,10 @@
 import React from 'react'
-import Image from 'next/image'
+import { Logo as SharedLogo } from '@healdoor/ui'
 
 export const Logo: React.FC = () => {
   return (
     <div className="logo-container" style={{ padding: '0.5rem', display: 'flex', alignItems: 'center' }}>
-      <Image
-        src="/logo_white_bg.svg"
-        alt="HealDoor Logo"
-        width={150}
-        height={50}
-        style={{ objectFit: 'contain' }}
-      />
+      <SharedLogo width={150} height={50} />
     </div>
   )
 }

@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  transpilePackages: ['@healdoor/types', '@healdoor/utils'],
+  transpilePackages: ['@healdoor/types', '@healdoor/utils', '@healdoor/ui'],
 };
 
 export default nextConfig;

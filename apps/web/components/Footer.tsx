@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { Logo } from "@healdoor/ui";
 import {
   MessageCircle,
   MapPin,
@@ -64,21 +64,19 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[hsl(210,30%,12%)] text-slate-300">
+    <footer className="bg-gradient-to-br from-[hsl(200,30%,96%)] to-[hsl(200,40%,92%)] text-slate-800">
       <div className="container py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="inline-block overflow-hidden rounded-lg">
-              <Image
-                src="/logo_white_bg.svg"
-                alt="HealDoor Logo"
+              <Logo
                 width={160}
                 height={60}
                 className="w-auto h-12"
               />
             </Link>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               Professional home healthcare services and medical equipment
               rental/purchase in Delhi NCR. Same day delivery. Trusted by
               thousands.
@@ -90,7 +88,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-teal transition-colors"
+                  className="w-9 h-9 rounded-full bg-white text-slate-600 shadow-sm border border-slate-200 flex items-center justify-center hover:bg-teal hover:text-white hover:border-teal transition-all hover:-translate-y-1"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" />
@@ -101,7 +99,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-heading font-semibold text-white text-sm uppercase tracking-wider">
+            <h4 className="font-heading font-semibold text-slate-900 text-sm uppercase tracking-wider">
               Quick Links
             </h4>
             <ul className="space-y-2.5">
@@ -109,7 +107,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-400 hover:text-teal transition-colors"
+                    className="text-sm text-slate-600 hover:text-teal font-medium transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -120,7 +118,7 @@ export function Footer() {
 
           {/* Legal */}
           <div className="space-y-4">
-            <h4 className="font-heading font-semibold text-white text-sm uppercase tracking-wider">
+            <h4 className="font-heading font-semibold text-slate-900 text-sm uppercase tracking-wider">
               Legal
             </h4>
             <ul className="space-y-2.5">
@@ -128,7 +126,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-400 hover:text-teal transition-colors"
+                    className="text-sm text-slate-600 hover:text-teal font-medium transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -139,19 +137,19 @@ export function Footer() {
 
           {/* Contact */}
           <div className="space-y-4">
-            <h4 className="font-heading font-semibold text-white text-sm uppercase tracking-wider">
+            <h4 className="font-heading font-semibold text-slate-900 text-sm uppercase tracking-wider">
               Contact Us
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 mt-1 text-teal shrink-0" />
-                <span className="text-sm text-slate-400">
+                <span className="text-sm text-slate-600">
                   160, Rajdhani Enclave, Parking Pitampura, Delhi - 110034
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-teal shrink-0" />
-                <div className="flex flex-col text-sm text-slate-400">
+                <div className="flex flex-col text-sm text-slate-600 font-medium">
                   <a
                     href="tel:+919871281574"
                     className="hover:text-teal transition-colors"
@@ -170,7 +168,7 @@ export function Footer() {
                 <Mail className="h-4 w-4 text-teal shrink-0" />
                 <a
                   href="mailto:ukmlamrcp@gmail.com"
-                  className="text-sm text-slate-400 hover:text-teal transition-colors"
+                  className="text-sm text-slate-600 font-medium hover:text-teal transition-colors"
                 >
                   ukmlamrcp@gmail.com
                 </a>
@@ -181,9 +179,9 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-slate-800">
+      <div className="border-t border-slate-200/60 bg-white/30 backdrop-blur-sm">
         <div className="container py-6 text-center">
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-600 font-medium">
             &copy; {new Date().getFullYear()} Heal Door. All rights reserved.
           </p>
         </div>
