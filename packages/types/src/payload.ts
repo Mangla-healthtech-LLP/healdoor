@@ -18,6 +18,7 @@ export interface Service {
   hero_image?: MediaItem | number | null
   features?: { feature?: string | null; id?: string | null }[] | null
   faqs?: (number | FAQ)[] | null
+  page_builder?: LayoutBlock[] | null
   seo?: SEOMeta
   updatedAt: string
   createdAt: string

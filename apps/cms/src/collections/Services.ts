@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { ProductGridBlock } from '../blocks'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -62,6 +63,13 @@ export const Services: CollectionConfig = {
           name: 'canonical',
           type: 'text',
         },
+      ],
+    },
+    {
+      name: 'page_builder',
+      type: 'blocks',
+      blocks: [
+        ProductGridBlock,
       ],
     },
   ],

@@ -221,6 +221,17 @@ export interface Service {
     description?: string | null;
     canonical?: string | null;
   };
+  page_builder?:
+    | {
+        sectionTitle?: string | null;
+        sectionDescription?: string | null;
+        displayMode?: ('rent' | 'buy' | 'both') | null;
+        products?: (number | Product)[] | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'productGrid';
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -247,6 +258,71 @@ export interface Faq {
     [k: string]: unknown;
   };
   category?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  image?: (number | null) | Media;
+  /**
+   * Monthly rent price in ₹ (e.g. 1499)
+   */
+  rentPrice?: number | null;
+  /**
+   * Purchase price in ₹ (e.g. 45000)
+   */
+  buyPrice?: number | null;
+  rating?: number | null;
+  ratingCount?: number | null;
+  rating5Star?: number | null;
+  rating4Star?: number | null;
+  rating3Star?: number | null;
+  rating2Star?: number | null;
+  rating1Star?: number | null;
+  category?: ('oxygen' | 'respiratory' | 'icu' | 'mobility' | 'monitoring' | 'other') | null;
+  /**
+   * Show in "Highest Selling Products" section
+   */
+  isFeatured?: boolean | null;
+  isAvailableForRent?: boolean | null;
+  isAvailableForPurchase?: boolean | null;
+  /**
+   * Lower numbers appear first
+   */
+  sortOrder?: number | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  faqs?: (number | Faq)[] | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    canonical?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -445,71 +521,6 @@ export interface Page {
   seo?: {
     meta_title?: string | null;
     meta_description?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: number;
-  name: string;
-  slug: string;
-  image?: (number | null) | Media;
-  /**
-   * Monthly rent price in ₹ (e.g. 1499)
-   */
-  rentPrice?: number | null;
-  /**
-   * Purchase price in ₹ (e.g. 45000)
-   */
-  buyPrice?: number | null;
-  rating?: number | null;
-  ratingCount?: number | null;
-  rating5Star?: number | null;
-  rating4Star?: number | null;
-  rating3Star?: number | null;
-  rating2Star?: number | null;
-  rating1Star?: number | null;
-  category?: ('oxygen' | 'respiratory' | 'icu' | 'mobility' | 'monitoring' | 'other') | null;
-  /**
-   * Show in "Highest Selling Products" section
-   */
-  isFeatured?: boolean | null;
-  isAvailableForRent?: boolean | null;
-  isAvailableForPurchase?: boolean | null;
-  /**
-   * Lower numbers appear first
-   */
-  sortOrder?: number | null;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  features?:
-    | {
-        feature?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  faqs?: (number | Faq)[] | null;
-  seo?: {
-    title?: string | null;
-    description?: string | null;
-    canonical?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -767,6 +778,20 @@ export interface ServicesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         canonical?: T;
+      };
+  page_builder?:
+    | T
+    | {
+        productGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              displayMode?: T;
+              products?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
