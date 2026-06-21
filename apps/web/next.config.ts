@@ -12,6 +12,16 @@ const nextConfig: NextConfig = {
         port: '3001',
         pathname: '/api/media/file/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'healdoor-prod-assets.s3.ap-south-1.amazonaws.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.healdoor.in',
+        pathname: '/**',
+      },
     ],
   },
   transpilePackages: ['@healdoor/types', '@healdoor/utils', '@healdoor/ui'],
