@@ -30,7 +30,7 @@ export default async function ServicesPage() {
           ]}
         />
         
-        <section className="section-padding bg-section-alt-bg">
+        <section className="section-padding-sm bg-section-alt-bg">
           <div className="container">
             {/* Search/Filter Bar */}
             <div className="max-w-2xl mx-auto mb-12 relative">
@@ -39,7 +39,7 @@ export default async function ServicesPage() {
                 <input 
                   type="text" 
                   placeholder="Search for a service..." 
-                  className="w-full pl-12 pr-4 py-4 rounded-full border border-border/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal/50 focus:border-teal transition-all text-text-dark"
+                  className="w-full pl-8 pr-4 py-4 rounded-full border border-border/50 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal/50 focus:border-teal transition-all text-text-dark"
                 />
               </div>
             </div>
