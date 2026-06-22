@@ -33,11 +33,21 @@ export interface Product {
   rentPrice?: number | null
   buyPrice?: number | null
   rating?: number | null
+  ratingCount?: number | null
+  rating5Star?: number | null
+  rating4Star?: number | null
+  rating3Star?: number | null
+  rating2Star?: number | null
+  rating1Star?: number | null
   category?: 'oxygen' | 'respiratory' | 'icu' | 'mobility' | 'monitoring' | 'other' | null
   isFeatured?: boolean
   isAvailableForRent?: boolean
   isAvailableForPurchase?: boolean
   sortOrder?: number | null
+  description?: LexicalContent | null
+  features?: { feature?: string | null; id?: string | null }[] | null
+  faqs?: (number | FAQ)[] | null
+  seo?: SEOMeta
   updatedAt: string
   createdAt: string
 }
@@ -263,4 +273,3 @@ export interface PayloadResponse<T> {
   hasPrevPage: boolean
   pagingCounter: number
 }
-

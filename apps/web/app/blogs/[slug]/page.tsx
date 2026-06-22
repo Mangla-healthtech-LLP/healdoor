@@ -17,8 +17,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const { docs: blogs } = await getBlogs({ limit: 100 })
-  return blogs.map((blog) => ({ slug: blog.slug }))
+  try {
+    const { docs: blogs } = await getBlogs({ limit: 100 })
+    return blogs.map((blog) => ({ slug: blog.slug }))
+  } catch (error) {
+    console.warn('Failed to generate blog static params:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -19,9 +19,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const productsResponse = await getProducts()
-  // Wait, getProducts returns PayloadResponse<Product>, so it has .docs
-  return productsResponse.docs.map((product) => ({ slug: product.slug }))
+  try {
+    const productsResponse = await getProducts()
+    return productsResponse.docs.map((product) => ({ slug: product.slug }))
+  } catch (error) {
+    console.warn('Failed to generate product static params:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -17,7 +17,7 @@ export const Products: CollectionConfig = {
           const id = req.routeParams?.id as string;
           if (!id) return Response.json({ error: 'Missing ID' }, { status: 400 });
 
-          const body = await req.json();
+          const body = typeof req.json === 'function' ? await (req.json as () => Promise<any>)() : {};
           const vote = Number(body.vote);
           if (!vote || vote < 1 || vote > 5) {
             return Response.json({ error: 'Invalid vote' }, { status: 400 });
@@ -27,20 +27,14 @@ export const Products: CollectionConfig = {
           if (!product) return Response.json({ error: 'Not found' }, { status: 404 });
 
           const starKey = `rating${vote}Star`;
-          // @ts-expect-error dynamic access
-          const currentStarCount = (product[starKey] as number) || 0;
+          const currentStarCount = Number((((product as unknown) as Record<string, unknown>)[starKey] as number) || 0);
           const newStarCount = currentStarCount + 1;
           const newTotalCount = (product.ratingCount as number || 0) + 1;
 
-          // @ts-expect-error dynamic access
           const r5 = vote === 5 ? newStarCount : (product.rating5Star as number || 0);
-          // @ts-expect-error dynamic access
           const r4 = vote === 4 ? newStarCount : (product.rating4Star as number || 0);
-          // @ts-expect-error dynamic access
           const r3 = vote === 3 ? newStarCount : (product.rating3Star as number || 0);
-          // @ts-expect-error dynamic access
           const r2 = vote === 2 ? newStarCount : (product.rating2Star as number || 0);
-          // @ts-expect-error dynamic access
           const r1 = vote === 1 ? newStarCount : (product.rating1Star as number || 0);
 
           const totalSum = (r5 * 5) + (r4 * 4) + (r3 * 3) + (r2 * 2) + (r1 * 1);

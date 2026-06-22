@@ -19,8 +19,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const services = await getServices()
-  return services.map((service) => ({ slug: service.slug }))
+  try {
+    const services = await getServices()
+    return services.map((service) => ({ slug: service.slug }))
+  } catch (error) {
+    console.warn('Failed to generate service static params:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
