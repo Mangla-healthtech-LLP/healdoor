@@ -13,8 +13,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const slugs = await getAllPageSlugs()
-  return slugs.map((slug) => ({ slug: slug.split('/') }))
+  try {
+    const slugs = await getAllPageSlugs()
+    return slugs.map((slug) => ({ slug: slug.split('/') }))
+  } catch (error) {
+    console.warn('Failed to generate page static params:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -20,6 +20,15 @@ import { s3Storage } from '@payloadcms/storage-s3'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const productionOrigins = [
+  process.env.WEB_ORIGIN,
+  ...(process.env.WEB_ORIGINS?.split(',') ?? []),
+]
+  .map((origin) => origin?.trim())
+  .filter((origin): origin is string => Boolean(origin))
+
+const corsOrigins = Array.from(new Set(['http://localhost:3000', ...productionOrigins]))
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -48,9 +57,7 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  cors: [
-    'http://localhost:3000',
-  ],
+  cors: corsOrigins,
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
