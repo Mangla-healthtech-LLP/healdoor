@@ -20,10 +20,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const productionOrigins = [
-  process.env.WEB_ORIGIN,
-  ...(process.env.WEB_ORIGINS?.split(',') ?? []),
-]
+const productionOrigins = [process.env.WEB_ORIGIN, ...(process.env.WEB_ORIGINS?.split(',') ?? [])]
   .map((origin) => origin?.trim())
   .filter((origin): origin is string => Boolean(origin))
 
@@ -66,22 +63,19 @@ export default buildConfig({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sharp: sharp as any,
   plugins: [
-    ...(process.env.AWS_S3_BUCKET
-      ? [
-          s3Storage({
-            collections: {
-              media: true,
-            },
-            bucket: process.env.AWS_S3_BUCKET,
-            config: {
-              credentials: {
-                accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-                secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
-              },
-              region: process.env.AWS_REGION,
-            },
-          }),
-        ]
-      : []),
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.AWS_S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.AWS_REGION || 'us-east-1',
+      },
+      enabled: !!process.env.AWS_S3_BUCKET,
+    }),
   ],
 })
