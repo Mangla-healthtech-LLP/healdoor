@@ -152,14 +152,14 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
+        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-5 w-5 text-text-body" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
+        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
         aria-label="Next slide"
       >
         <ChevronRight className="h-5 w-5 text-text-body" />
