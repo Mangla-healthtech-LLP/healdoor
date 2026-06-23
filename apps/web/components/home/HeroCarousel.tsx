@@ -152,19 +152,19 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
+        className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent sm:bg-white/40 sm:backdrop-blur-sm sm:shadow-sm flex items-center justify-center hover:bg-black/5 sm:hover:bg-white transition-all z-20 cursor-pointer"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-5 w-5 text-text-body" />
+        <ChevronLeft className="h-8 w-8 sm:h-5 sm:w-5 text-text-body opacity-50 sm:opacity-100" />
       </button>
       <button
         onClick={next}
-        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
+        className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent sm:bg-white/40 sm:backdrop-blur-sm sm:shadow-sm flex items-center justify-center hover:bg-black/5 sm:hover:bg-white transition-all z-20 cursor-pointer"
         aria-label="Next slide"
       >
-        <ChevronRight className="h-5 w-5 text-text-body" />
+        <ChevronRight className="h-8 w-8 sm:h-5 sm:w-5 text-text-body opacity-50 sm:opacity-100" />
       </button>
-
+      
       {/* Dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
         {data.map((s, i) => (
