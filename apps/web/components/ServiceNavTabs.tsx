@@ -21,12 +21,12 @@ const serviceTabs = [
 
   {
     title: "Oxygen Equipment",
-    href: "/oxygen-equipment",
+    href: "/services/oxygen-equipment",
     icon: Wind,
   },
   {
     title: "Investigation at Home",
-    href: "/investigations-at-home",
+    href: "/services/investigations-at-home",
     icon: Microscope,
   },
   {
@@ -36,7 +36,7 @@ const serviceTabs = [
   },
   {
     title: "ICU at Home",
-    href: "/icu-at-home",
+    href: "/services/icu-at-home",
     icon: BedDouble,
   },
   {
