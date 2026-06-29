@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     // Allow images from public directory (default) and any external sources if needed later
     unoptimized: false,
-    dangerouslyAllowLocalIP: true, // TODO: remove in production
+    dangerouslyAllowLocalIP: true,  // TODO: remove in production
     remotePatterns: [
       {
         protocol: 'http',
@@ -40,6 +40,6 @@ const nextConfig: NextConfig = {
     ],
   },
   transpilePackages: ['@healdoor/types', '@healdoor/utils', '@healdoor/ui'],
-}
+};
 
 export default nextConfig;

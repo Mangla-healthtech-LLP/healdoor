@@ -3,7 +3,6 @@
 import { revalidatePath } from 'next/cache'
 
 const CMS_URL = process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3001'
-const API_KEY = process.env.PAYLOAD_API_KEY || ''
 
 export async function submitProductRating(productId: string, currentRating: number, currentCount: number, newVote: number) {
   try {

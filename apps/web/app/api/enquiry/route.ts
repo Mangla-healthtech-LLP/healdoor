@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     
-    const { name, mobile, service, location, message, sourceUrl } = body;
+    const { name, mobile, service, location, message, sourceUrl, productSlug } = body;
 
     // Format mobile to E.164. e.g. +91XXXXXXXXXX
     let formattedMobile = mobile.replace(/\s+/g, '');
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
       name,
       mobile: formattedMobile,
       service_slug_history: service || "Unknown Service",
+      product_slug: productSlug || "",
       location: location || "Unknown Location",
       message: message || "",
       source_url: sourceUrl || "Website",

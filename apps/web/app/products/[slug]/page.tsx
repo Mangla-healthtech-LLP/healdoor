@@ -6,7 +6,6 @@ import { getProductBySlug, getProducts, getMediaUrl } from '@healdoor/utils'
 import { Navbar } from '@/components/Navbar'
 import { ServiceNavTabs } from '@/components/ServiceNavTabs';
 import { Footer } from '@/components/Footer'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { LexicalSerializer } from '@/components/renderer/LexicalSerializer'
 import { CheckCircle2, ArrowRight, IndianRupee } from 'lucide-react'
 import { FAQBlock } from '@/components/blocks/FAQBlock'
@@ -124,9 +123,21 @@ export default async function ProductDetailPage({ params }: Props) {
                 </div>
 
                 {product.category && (
-                  <span className="inline-block px-4 py-1.5 bg-teal-light text-teal text-sm font-bold rounded-full w-fit mb-4 uppercase tracking-wider">
-                    {product.category.replace('-', ' ')}
-                  </span>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {Array.isArray(product.category) ? product.category.map((cat: { name?: string; slug?: string } | string, idx: number) => {
+                      const text = typeof cat === 'string' ? cat : (cat.name || cat.slug || '');
+                      if (!text) return null;
+                      return (
+                        <span key={idx} className="inline-block px-4 py-1.5 bg-teal-light text-teal text-sm font-bold rounded-full w-fit uppercase tracking-wider">
+                          {text.replace('-', ' ')}
+                        </span>
+                      )
+                    }) : (
+                      <span className="inline-block px-4 py-1.5 bg-teal-light text-teal text-sm font-bold rounded-full w-fit uppercase tracking-wider">
+                        {String(product.category).replace('-', ' ')}
+                      </span>
+                    )}
+                  </div>
                 )}
 
                 {/* Pricing Options */}

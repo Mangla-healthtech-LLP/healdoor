@@ -1,5 +1,6 @@
 import { Wind, Building2, HeartPulse, Activity } from "lucide-react";
 import type { ProblemItem } from "@healdoor/types";
+import Link from "next/link";
 
 const IconMap: Record<string, React.ElementType> = {
   Wind,
@@ -59,6 +60,15 @@ export function ProblemsSection({
               </div>
             );
           })}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center px-8 py-3.5 bg-orange text-white font-semibold rounded-full shadow-lg hover:bg-teal-dark hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
     </section>

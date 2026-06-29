@@ -42,7 +42,7 @@ export default async function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
               
               {/* Contact Information */}
-              <div className="space-y-10">
+              <div className="space-y-10 order-2 lg:order-1">
                 <div>
                   <h2 className="font-heading text-3xl font-bold text-text-dark mb-6">
                     Get in Touch
@@ -86,8 +86,8 @@ export default async function ContactPage() {
                     <div>
                       <h3 className="font-heading font-bold text-text-dark mb-1">Office Location</h3>
                       <p className="text-text-body leading-relaxed">
-                        160, Rajdhani Enclave, Parking <br />
-                        Pitampura, Delhi 110034<br />
+                        264, Pocket H-17, Sector-7 <br />
+                        Rohini, Delhi-110085<br />
                         India
                       </p>
                     </div>
@@ -110,9 +110,8 @@ export default async function ContactPage() {
               </div>
 
               {/* Form Container */}
-              <div className="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-border/50 relative">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal-light rounded-bl-full -z-10 opacity-50" />
-                <h2 className="font-heading text-2xl font-bold text-text-dark mb-8">
+              <div className="bg-white rounded-3xl p-6 md:p-8 border border-border/30 shadow-sm order-1 lg:order-2">
+                <h2 className="font-heading text-2xl font-bold text-text-dark mb-6">
                   Send us a Message
                 </h2>
                 <EnquiryForm />

@@ -11,10 +11,14 @@ interface LocationSectionProps {
 export function LocationSection({
   heading = "Our Location",
   companyName = "HealDoor Healthcare",
-  address = "160, Rajdhani Enclave,\nParking Pitampura,\nDelhi - 110034",
-  mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.9!2d77.1440!3d28.6983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQxJzUzLjkiTiA3N8KwMDgnMzguNCJF!5e0!3m2!1sen!2sin!4v1",
-  getDirectionsLink = "https://maps.google.com/?q=160+Rajdhani+Enclave+Pitampura+Delhi+110034",
+  address = "264, Pocket H-17,\nSector-7, Rohini,\nDelhi-110085",
+  mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28003.543453880493!2d77.11651591834246!3d28.69804868284705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03d4fb0e1dc9%3A0x633513a968600dcb!2sPitampura%2C%20Delhi!5e0!3m2!1sen!2sin!4v1705600000000!5m2!1sen!2sin",
+  getDirectionsLink = "https://maps.google.com/?q=264+pocket+H-17+sector-7+Rohini+Delhi+110085",
 }: LocationSectionProps) {
+  const validMapUrl = mapEmbedUrl?.includes('/maps/embed') 
+    ? mapEmbedUrl 
+    : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28003.543453880493!2d77.11651591834246!3d28.69804868284705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03d4fb0e1dc9%3A0x633513a968600dcb!2sPitampura%2C%20Delhi!5e0!3m2!1sen!2sin!4v1705600000000!5m2!1sen!2sin";
+
   return (
     <section className="section-padding bg-section-alt-bg">
       <div className="container">
@@ -55,10 +59,10 @@ export function LocationSection({
 
             {/* Map */}
             <div className="relative min-h-[280px] lg:min-h-0">
-              {mapEmbedUrl ? (
+              {validMapUrl ? (
                 <>
                   <iframe
-                    src={mapEmbedUrl}
+                    src={validMapUrl}
                     width="100%"
                     height="100%"
                     style={{ border: 0, minHeight: 280 }}

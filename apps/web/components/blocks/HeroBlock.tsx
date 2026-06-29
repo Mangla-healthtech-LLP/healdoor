@@ -15,13 +15,13 @@ export function HeroBlock({
   showStats = false,
 }: HeroBlockData) {
   const bgUrl = getMediaUrl(backgroundImage) || '/images/hero-banner.png'
-  
+
   let alignClasses = 'items-start text-left'
   if (alignment === 'center') alignClasses = 'items-center text-center'
   if (alignment === 'right') alignClasses = 'items-end text-right ml-auto'
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(170,65%,30%)] via-[hsl(180,55%,35%)] to-[hsl(200,70%,35%)] min-h-[480px] lg:min-h-[540px]">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(170,65%,30%)] via-[hsl(180,55%,35%)] to-[hsl(200,70%,35%)] min-h-[250px] lg:min-h-[350px]">
       <div className="absolute inset-0">
         <Image
           src={bgUrl}
@@ -33,13 +33,13 @@ export function HeroBlock({
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(170,65%,22%)]/90 via-[hsl(170,65%,28%)]/70 to-transparent" />
       </div>
 
-      <div className="container relative z-10 flex items-center min-h-[480px] lg:min-h-[540px]">
+      <div className="container relative z-10 flex items-center min-h-[320px] lg:min-h-[400px]">
         <div className={`flex flex-col w-full py-12 max-w-2xl ${alignClasses}`}>
           <div className="space-y-6 text-white">
             <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] animate-fade-in-up">
               {heading}
             </h1>
-            
+
             {subHeading && (
               <p className="text-lg sm:text-xl text-white/90 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
                 {subHeading}

@@ -83,14 +83,14 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       <div className="container relative z-10 flex items-center min-h-[300px] lg:min-h-[350px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full py-6">
           {/* Left content */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3 sm:space-y-4 px-8 sm:px-12 lg:px-10">
             {slide.badge && (
-              <span className="inline-block px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase bg-orange text-white rounded-sm animate-fade-in">
+              <span className="inline-block px-2 py-1 text-[9px] sm:px-3 sm:py-1.5 sm:text-[11px] font-bold tracking-widest uppercase bg-orange text-white rounded-sm animate-fade-in">
                 {slide.badge}
               </span>
             )}
 
-            <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-[2.5rem] font-extrabold tracking-tight leading-[1.1] text-text-dark animate-fade-in-up whitespace-pre-line">
+            <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-[2.5rem] font-black sm:font-extrabold tracking-tight leading-[1.1] text-gray-900 sm:text-text-dark animate-fade-in-up whitespace-pre-line drop-shadow-sm sm:drop-shadow-none">
               {slide.heading}
             </h1>
 
@@ -171,11 +171,10 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
           <button
             key={s.id || i}
             onClick={() => setCurrent(i)}
-            className={`h-2.5 rounded-full transition-all cursor-pointer ${
-              i === current
-                ? "w-8 bg-teal"
-                : "w-2.5 bg-teal/30 hover:bg-teal/50"
-            }`}
+            className={`h-2.5 rounded-full transition-all cursor-pointer ${i === current
+              ? "w-8 bg-teal"
+              : "w-2.5 bg-teal/30 hover:bg-teal/50"
+              }`}
             aria-label={`Slide ${i + 1}`}
           />
         ))}

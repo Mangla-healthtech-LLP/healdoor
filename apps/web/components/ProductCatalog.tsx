@@ -9,9 +9,10 @@ import { getMediaUrl, getMediaAlt } from "@healdoor/utils";
 
 interface ProductCatalogProps {
   initialProducts: Product[];
+  categories?: { label: string; value: string }[];
 }
 
-const CATEGORIES = [
+const DEFAULT_CATEGORIES = [
   { label: 'All Products', value: 'all' },
   { label: 'Oxygen Equipment', value: 'oxygen' },
   { label: 'Respiratory', value: 'respiratory' },
@@ -29,7 +30,7 @@ const SORT_OPTIONS = [
   { label: 'Price: High to Low', value: 'price_desc' },
 ];
 
-export function ProductCatalog({ initialProducts }: ProductCatalogProps) {
+export function ProductCatalog({ initialProducts, categories }: ProductCatalogProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [sortBy, setSortBy] = useState("default");
@@ -45,9 +46,25 @@ export function ProductCatalog({ initialProducts }: ProductCatalogProps) {
       result = result.filter(p => p.name.toLowerCase().includes(q));
     }
 
+    // Filter by mode (rent vs buy availability)
+    if (mode === 'rent') {
+      result = result.filter(p => p.isAvailableForRent);
+    } else if (mode === 'buy') {
+      result = result.filter(p => p.isAvailableForPurchase);
+    }
+
     // Filter by category
     if (category !== 'all') {
-      result = result.filter(p => p.category === category);
+      result = result.filter(p => {
+        // Handle string category (old format) or array of relationships (new format)
+        if (Array.isArray(p.category)) {
+          return p.category.some(c => {
+            if (typeof c === 'string') return c === category;
+            return c && typeof c === 'object' && ('slug' in c ? c.slug === category : c.id === category);
+          });
+        }
+        return p.category === category;
+      });
     }
 
     // Sort
@@ -83,8 +100,8 @@ export function ProductCatalog({ initialProducts }: ProductCatalogProps) {
 
   const controlsContent = (
     <div className="flex flex-col gap-6">
-      {/* Search */}
-      <div>
+      {/* Search - Hidden on mobile since it's outside the drawer */}
+      <div className="hidden lg:block">
         <label className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 block">Search</label>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted w-4 h-4" />
@@ -131,7 +148,7 @@ export function ProductCatalog({ initialProducts }: ProductCatalogProps) {
       <div>
         <label className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 block">Category</label>
         <div className="flex flex-col gap-1.5">
-          {CATEGORIES.map(cat => (
+          {(categories || DEFAULT_CATEGORIES).map(cat => (
             <button
               key={cat.value}
               onClick={() => setCategory(cat.value)}
@@ -170,17 +187,29 @@ export function ProductCatalog({ initialProducts }: ProductCatalogProps) {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           
           {/* Mobile Header / Drawer Toggle */}
-          <div className="lg:hidden flex items-center justify-between bg-white p-3 md:p-4 rounded-xl shadow-sm border border-border/50">
-            <div className="text-sm font-bold text-text-dark">
+          <div className="lg:hidden flex flex-col gap-3 mb-2">
+            <div className="flex items-center justify-between bg-white p-3 md:p-4 rounded-xl shadow-sm border border-border/50 gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted w-4 h-4" />
+                <input 
+                  type="text" 
+                  placeholder="Search products..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-border focus:outline-none focus:ring-2 focus:ring-teal/50 focus:border-teal transition-all text-text-dark text-sm bg-section-alt-bg"
+                />
+              </div>
+              <button 
+                onClick={() => setIsDrawerOpen(true)} 
+                className="flex items-center gap-2 bg-section-alt-bg hover:bg-gray-200 text-teal px-4 py-2.5 rounded-xl font-semibold text-sm transition-colors flex-shrink-0"
+              >
+                <Menu className="w-5 h-5" />
+                <span className="hidden sm:inline">Filters</span>
+              </button>
+            </div>
+            <div className="text-sm font-bold text-text-dark px-1">
               {filteredAndSortedProducts.length} <span className="text-text-muted font-normal">products</span>
             </div>
-            <button 
-              onClick={() => setIsDrawerOpen(true)} 
-              className="flex items-center gap-2 bg-section-alt-bg hover:bg-gray-200 text-teal px-4 py-2 rounded-lg font-semibold text-sm transition-colors"
-            >
-              <Menu className="w-4 h-4" />
-              Filters
-            </button>
           </div>
 
           {/* Mobile Drawer Overlay */}
