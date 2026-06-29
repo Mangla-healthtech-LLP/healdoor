@@ -76,6 +76,7 @@ export interface Config {
     testimonials: Testimonial;
     faqs: Faq;
     products: Product;
+    'product-categories': ProductCategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -222,15 +224,77 @@ export interface Service {
     canonical?: string | null;
   };
   page_builder?:
-    | {
-        sectionTitle?: string | null;
-        sectionDescription?: string | null;
-        displayMode?: ('rent' | 'buy' | 'both') | null;
-        products?: (number | Product)[] | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'productGrid';
-      }[]
+    | (
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            displayMode?: ('rent' | 'buy' | 'both') | null;
+            products?: (number | Product)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'productGrid';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            /**
+             * Select the categories to display as tabs above the product grid.
+             */
+            categoriesToDisplay?: (number | ProductCategory)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'productCollection';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            plans: {
+              title: string;
+              price: string;
+              /**
+               * E.g., /month or one-time
+               */
+              billingPeriod?: string | null;
+              /**
+               * Highlight this plan
+               */
+              isPopular?: boolean | null;
+              features?:
+                | {
+                    feature: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              buttonText?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricingGrid';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            columns?: ('2' | '3') | null;
+            items: {
+              image: number | Media;
+              /**
+               * Lucide icon name (e.g., Activity, Truck, Check)
+               */
+              icon?: string | null;
+              title: string;
+              description?: string | null;
+              /**
+               * Link URL (e.g., /contact?product=wheelchair)
+               */
+              link?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'itemGrid';
+          }
+      )[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -285,7 +349,7 @@ export interface Product {
   rating3Star?: number | null;
   rating2Star?: number | null;
   rating1Star?: number | null;
-  category?: ('oxygen' | 'respiratory' | 'icu' | 'mobility' | 'monitoring' | 'other') | null;
+  category?: (number | ProductCategory)[] | null;
   /**
    * Show in "Highest Selling Products" section
    */
@@ -323,6 +387,17 @@ export interface Product {
     description?: string | null;
     canonical?: string | null;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories".
+ */
+export interface ProductCategory {
+  id: number;
+  name: string;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -516,6 +591,66 @@ export interface Page {
             blockName?: string | null;
             blockType: 'doctorGrid';
           }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            /**
+             * Select the categories to display as tabs above the product grid.
+             */
+            categoriesToDisplay?: (number | ProductCategory)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'productCollection';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            plans: {
+              title: string;
+              price: string;
+              /**
+               * E.g., /month or one-time
+               */
+              billingPeriod?: string | null;
+              /**
+               * Highlight this plan
+               */
+              isPopular?: boolean | null;
+              features?:
+                | {
+                    feature: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              buttonText?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricingGrid';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            columns?: ('2' | '3') | null;
+            items: {
+              image: number | Media;
+              /**
+               * Lucide icon name (e.g., Activity, Truck, Check)
+               */
+              icon?: string | null;
+              title: string;
+              description?: string | null;
+              /**
+               * Link URL (e.g., /contact?product=wheelchair)
+               */
+              link?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'itemGrid';
+          }
       )[]
     | null;
   seo?: {
@@ -667,6 +802,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'product-categories';
+        value: number | ProductCategory;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -789,6 +928,58 @@ export interface ServicesSelect<T extends boolean = true> {
               sectionDescription?: T;
               displayMode?: T;
               products?: T;
+              id?: T;
+              blockName?: T;
+            };
+        productCollection?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              categoriesToDisplay?: T;
+              id?: T;
+              blockName?: T;
+            };
+        pricingGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              plans?:
+                | T
+                | {
+                    title?: T;
+                    price?: T;
+                    billingPeriod?: T;
+                    isPopular?: T;
+                    features?:
+                      | T
+                      | {
+                          feature?: T;
+                          id?: T;
+                        };
+                    buttonText?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        itemGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    image?: T;
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    link?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -954,6 +1145,58 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        productCollection?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              categoriesToDisplay?: T;
+              id?: T;
+              blockName?: T;
+            };
+        pricingGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              plans?:
+                | T
+                | {
+                    title?: T;
+                    price?: T;
+                    billingPeriod?: T;
+                    isPopular?: T;
+                    features?:
+                      | T
+                      | {
+                          feature?: T;
+                          id?: T;
+                        };
+                    buttonText?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        itemGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    image?: T;
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    link?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   seo?:
     | T
@@ -1060,6 +1303,16 @@ export interface ProductsSelect<T extends boolean = true> {
         description?: T;
         canonical?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories_select".
+ */
+export interface ProductCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1210,6 +1463,18 @@ export interface HomepageSetting {
            */
           badge?: string | null;
           image?: (number | null) | Media;
+          /**
+           * LinkedIn Profile URL
+           */
+          linkedin?: string | null;
+          /**
+           * Twitter/X Profile URL
+           */
+          twitter?: string | null;
+          /**
+           * Instagram Profile URL
+           */
+          instagram?: string | null;
           id?: string | null;
         }[]
       | null;
@@ -1417,6 +1682,9 @@ export interface HomepageSettingsSelect<T extends boolean = true> {
               experience?: T;
               badge?: T;
               image?: T;
+              linkedin?: T;
+              twitter?: T;
+              instagram?: T;
               id?: T;
             };
       };

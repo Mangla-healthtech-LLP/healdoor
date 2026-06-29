@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { Phone } from 'lucide-react'
+import { Phone } from "lucide-react";
 
 export function FloatingCTAs() {
-  const phoneNumber = process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919871281574'
-  const whatsappNumber = process.env.NEXT_PUBLIC_CONTACT_WHATSAPP || '9871281574'
+  const phoneNumber = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+919871281574";
+  const whatsappNumber = process.env.NEXT_PUBLIC_CONTACT_WHATSAPP || "919871281574";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
@@ -40,5 +40,5 @@ export function FloatingCTAs() {
         <Phone className="w-6 h-6" />
       </a>
     </div>
-  )
+  );
 }

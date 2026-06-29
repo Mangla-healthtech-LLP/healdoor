@@ -107,6 +107,41 @@ export interface DoctorGridBlockData {
   }[]
 }
 
+export interface PricingGridBlockData {
+  blockType: 'pricingGrid'
+  id?: string
+  sectionTitle?: string | null
+  sectionDescription?: string | null
+  plans: {
+    title: string
+    price: string
+    billingPeriod?: string | null
+    isPopular?: boolean | null
+    features?: {
+      feature: string
+      id?: string | null
+    }[]
+    buttonText?: string | null
+    id?: string | null
+  }[]
+}
+
+export interface ItemGridBlockData {
+  blockType: 'itemGrid'
+  id?: string
+  sectionTitle?: string | null
+  sectionDescription?: string | null
+  columns?: '2' | '3' | null
+  items: {
+    image: MediaItem | number
+    icon?: string | null
+    title: string
+    description?: string | null
+    link?: string | null
+    id?: string | null
+  }[]
+}
+
 export type LayoutBlock =
   | HeroBlockData
   | CTABlockData
@@ -117,4 +152,6 @@ export type LayoutBlock =
   | ProductGridBlockData
   | StepsBlockData
   | DoctorGridBlockData
+  | PricingGridBlockData
+  | ItemGridBlockData
 

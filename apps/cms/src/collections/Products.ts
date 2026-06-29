@@ -17,7 +17,7 @@ export const Products: CollectionConfig = {
           const id = req.routeParams?.id as string;
           if (!id) return Response.json({ error: 'Missing ID' }, { status: 400 });
 
-          const body = typeof req.json === 'function' ? await (req.json as () => Promise<any>)() : {};
+          const body = typeof req.json === 'function' ? await (req.json as () => Promise<Record<string, unknown>>)() : {};
           const vote = Number(body.vote);
           if (!vote || vote < 1 || vote > 5) {
             return Response.json({ error: 'Invalid vote' }, { status: 400 });
@@ -132,15 +132,9 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'category',
-      type: 'select',
-      options: [
-        { label: 'Oxygen Equipment', value: 'oxygen' },
-        { label: 'Respiratory', value: 'respiratory' },
-        { label: 'ICU Equipment', value: 'icu' },
-        { label: 'Mobility Aids', value: 'mobility' },
-        { label: 'Monitoring', value: 'monitoring' },
-        { label: 'Other', value: 'other' },
-      ],
+      type: 'relationship',
+      relationTo: 'product-categories',
+      hasMany: true,
     },
     {
       name: 'isFeatured',

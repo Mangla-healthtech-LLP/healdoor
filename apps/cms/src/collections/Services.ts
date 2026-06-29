@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { ProductGridBlock } from '../blocks'
+import { ProductGridBlock, ProductCollectionBlock, PricingGridBlock, ItemGridBlock } from '../blocks'
 
 export const Services: CollectionConfig = {
   slug: 'services',
@@ -70,6 +70,9 @@ export const Services: CollectionConfig = {
       type: 'blocks',
       blocks: [
         ProductGridBlock,
+        ProductCollectionBlock,
+        PricingGridBlock,
+        ItemGridBlock,
       ],
     },
   ],

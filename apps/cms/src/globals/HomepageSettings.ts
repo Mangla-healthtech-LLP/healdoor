@@ -265,6 +265,21 @@ export const HomepageSettings: GlobalConfig = {
               type: 'upload',
               relationTo: 'media',
             },
+            {
+              name: 'linkedin',
+              type: 'text',
+              admin: { description: 'LinkedIn Profile URL' },
+            },
+            {
+              name: 'twitter',
+              type: 'text',
+              admin: { description: 'Twitter/X Profile URL' },
+            },
+            {
+              name: 'instagram',
+              type: 'text',
+              admin: { description: 'Instagram Profile URL' },
+            },
           ],
         },
       ],
@@ -501,7 +516,7 @@ export const HomepageSettings: GlobalConfig = {
         {
           name: 'address',
           type: 'textarea',
-          defaultValue: '160, Rajdhani Enclave, Parking Pitampura, Delhi - 110034',
+          defaultValue: '264, Pocket H-17, Sector-7, Rohini, Delhi-110085',
         },
         {
           name: 'mapEmbedUrl',
@@ -511,7 +526,7 @@ export const HomepageSettings: GlobalConfig = {
         {
           name: 'getDirectionsLink',
           type: 'text',
-          defaultValue: 'https://maps.google.com/?q=160+Rajdhani+Enclave+Pitampura+Delhi+110034',
+          defaultValue: 'https://maps.google.com/?q=264+pocket+H-17+sector-7+Rohini+Delhi+110085',
         },
       ],
     },

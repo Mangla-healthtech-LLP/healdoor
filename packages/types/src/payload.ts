@@ -142,6 +142,9 @@ export interface DoctorProfile {
   experience?: string | null
   badge?: string | null
   image?: MediaItem | number | null
+  linkedin?: string | null
+  twitter?: string | null
+  instagram?: string | null
   id?: string | null
 }
 

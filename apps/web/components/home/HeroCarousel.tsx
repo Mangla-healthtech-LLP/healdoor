@@ -83,14 +83,14 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       <div className="container relative z-10 flex items-center min-h-[300px] lg:min-h-[350px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center w-full py-6">
           {/* Left content */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3 sm:space-y-4 px-8 sm:px-12 lg:px-10">
             {slide.badge && (
-              <span className="inline-block px-3 py-1.5 text-[11px] font-bold tracking-widest uppercase bg-orange text-white rounded-sm animate-fade-in">
+              <span className="inline-block px-2 py-1 text-[9px] sm:px-3 sm:py-1.5 sm:text-[11px] font-bold tracking-widest uppercase bg-orange text-white rounded-sm animate-fade-in">
                 {slide.badge}
               </span>
             )}
 
-            <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-[2.5rem] font-extrabold tracking-tight leading-[1.1] text-text-dark animate-fade-in-up whitespace-pre-line">
+            <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-[2.5rem] font-black sm:font-extrabold tracking-tight leading-[1.1] text-gray-900 sm:text-text-dark animate-fade-in-up whitespace-pre-line drop-shadow-sm sm:drop-shadow-none">
               {slide.heading}
             </h1>
 
@@ -152,17 +152,17 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
+        className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent sm:bg-white/40 sm:backdrop-blur-sm sm:shadow-sm flex items-center justify-center hover:bg-black/5 sm:hover:bg-white transition-all z-20 cursor-pointer"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-5 w-5 text-text-body" />
+        <ChevronLeft className="h-8 w-8 sm:h-5 sm:w-5 text-text-body opacity-50 sm:opacity-100" />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all z-20 cursor-pointer"
+        className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent sm:bg-white/40 sm:backdrop-blur-sm sm:shadow-sm flex items-center justify-center hover:bg-black/5 sm:hover:bg-white transition-all z-20 cursor-pointer"
         aria-label="Next slide"
       >
-        <ChevronRight className="h-5 w-5 text-text-body" />
+        <ChevronRight className="h-8 w-8 sm:h-5 sm:w-5 text-text-body opacity-50 sm:opacity-100" />
       </button>
 
       {/* Dots */}
@@ -171,11 +171,10 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
           <button
             key={s.id || i}
             onClick={() => setCurrent(i)}
-            className={`h-2.5 rounded-full transition-all cursor-pointer ${
-              i === current
-                ? "w-8 bg-teal"
-                : "w-2.5 bg-teal/30 hover:bg-teal/50"
-            }`}
+            className={`h-2.5 rounded-full transition-all cursor-pointer ${i === current
+              ? "w-8 bg-teal"
+              : "w-2.5 bg-teal/30 hover:bg-teal/50"
+              }`}
             aria-label={`Slide ${i + 1}`}
           />
         ))}

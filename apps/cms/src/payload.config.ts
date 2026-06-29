@@ -1,5 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, UploadFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -14,13 +14,17 @@ import { Blogs } from './collections/Blogs'
 import { Testimonials } from './collections/Testimonials'
 import { FAQs } from './collections/FAQs'
 import { Products } from './collections/Products'
+import { ProductCategories } from './collections/ProductCategories'
 import { HomepageSettings } from './globals'
 import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const productionOrigins = [process.env.WEB_ORIGIN, ...(process.env.WEB_ORIGINS?.split(',') ?? [])]
+const productionOrigins = [
+  process.env.WEB_ORIGIN,
+  ...(process.env.WEB_ORIGINS?.split(',') ?? []),
+]
   .map((origin) => origin?.trim())
   .filter((origin): origin is string => Boolean(origin))
 
@@ -47,9 +51,37 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Services, Leads, Pages, Blogs, Testimonials, FAQs, Products],
+  collections: [Users, Media, Services, Leads, Pages, Blogs, Testimonials, FAQs, Products, ProductCategories],
   globals: [HomepageSettings],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures.filter((f) => f.key !== 'upload'),
+      UploadFeature({
+        collections: {
+          media: {
+            fields: [
+              {
+                name: 'customWidth',
+                type: 'number',
+                label: 'Custom Width (px)',
+                admin: {
+                  description: 'Leave empty for natural image width.',
+                },
+              },
+              {
+                name: 'customHeight',
+                type: 'number',
+                label: 'Custom Height (px)',
+                admin: {
+                  description: 'Leave empty for auto height.',
+                },
+              },
+            ],
+          },
+        },
+      }),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -59,6 +91,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    push: process.env.PAYLOAD_DB_PUSH === 'true' ? true : undefined,
   }),
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sharp: sharp as any,
