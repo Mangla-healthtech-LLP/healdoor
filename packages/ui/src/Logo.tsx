@@ -17,7 +17,6 @@ export const Logo: React.FC<{ className?: string, width?: number, height?: numbe
       className={className}
       style={{ objectFit: 'contain' }}
       priority={priority}
-      {/* unoptimized */}
     />
   )
 }
