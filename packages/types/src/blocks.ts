@@ -75,7 +75,7 @@ export interface ProductGridBlockData {
   sectionTitle?: string | null
   sectionDescription?: string | null
   displayMode?: 'rent' | 'buy' | 'both'
-  products?: (number | { id: number; name: string; slug: string; image?: MediaItem | number | null; rentPrice?: number | null; buyPrice?: number | null; rating?: number | null })[]
+  products?: (number | { id: number; name: string; slug: string; image?: MediaItem | number | null; rentPrice?: number | null; buyPrice?: number | null; rating?: number | null; isAvailableForRent?: boolean | null; isAvailableForPurchase?: boolean | null })[]
 }
 
 export interface StepsBlockData {
