@@ -65,7 +65,14 @@ export function ProductGridBlock({
         )}
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((product, i) => {
+           {products
+            .filter((product) => {
+              if (typeof product === "number") return false;
+              if (mode === "rent") return product.isAvailableForRent !== false;
+              if (mode === "buy") return product.isAvailableForPurchase !== false;
+              return true;
+            })
+            .map((product, i) => {
             if (typeof product === "number") return null;
             const imageUrl =
               getMediaUrl(product.image as Parameters<typeof getMediaUrl>[0]) || "/images/service-medical.png";

@@ -51,7 +51,7 @@ export default async function Home() {
   const { homepage, blogs, testimonials, products } = await getHomeData();
 
   // Products for rent/buy section — filter available for rent
-  const rentProducts = products.filter((p) => p.isAvailableForRent !== false);
+  // const rentProducts = products.filter((p) => p.isAvailableForRent !== false);
 
   return (
     <>
@@ -78,7 +78,7 @@ export default async function Home() {
         <RentOrBuySection
           heading={homepage?.rentOrBuySection?.heading}
           description={homepage?.rentOrBuySection?.description}
-          products={rentProducts.length > 0 ? rentProducts : undefined}
+          products={products.length > 0 ? products : undefined}
           rentBenefits={homepage?.rentOrBuySection?.rentBenefits}
           buyBenefits={homepage?.rentOrBuySection?.buyBenefits}
         />
