@@ -15,7 +15,7 @@ import { Logo } from "@healdoor/ui";
 
 const servicesDropdown = [
   { label: "Physio at Home", href: "/services/physiotherapy" },
-  { label: "Oxygen Equipment at Home", href: "/services/oxygen-equipment" },
+  { label: "Oxygen Equipment at Home", href: "/oxygen-equipment" },
   { label: "ICU at Home", href: "/services/icu-at-home" },
   { label: "Investigation at Home", href: "/services/investigations-at-home" },
   { label: "Nursing & Elderly Care", href: "/services/nursing-elderly-care-gda" },
