@@ -21,7 +21,7 @@ const serviceTabs = [
 
   {
     title: "Oxygen Equipment",
-    href: "/services/oxygen-equipment",
+    href: "/oxygen-equipment",
     icon: Wind,
   },
   {
