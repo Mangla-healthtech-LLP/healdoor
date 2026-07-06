@@ -14,22 +14,20 @@ import Link from "next/link";
 import { Logo } from "@healdoor/ui";
 
 const servicesDropdown = [
-  { label: "Physio at Home", href: "/services/physiotherapy" },
-  { label: "Oxygen Equipment at Home", href: "/oxygen-equipment" },
-  { label: "ICU at Home", href: "/services/icu-at-home" },
-  { label: "Investigation at Home", href: "/services/investigations-at-home" },
-  { label: "Nursing & Elderly Care", href: "/services/nursing-elderly-care-gda" },
+  { label: "Physiotherapy", href: "/services/physiotherapy" },
+  { label: "Doctor Consultation", href: "/services/doctor-consultation" },
+  { label: "Disease Prevention/ Diet Plan", href: "/services/disease-prevention" },
+  { label: "ICU setup at Home", href: "/services/icu-at-home" },
+  { label: "Blood tests at Home", href: "/services/investigations-at-home" },
 ];
 
 const equipmentsDropdown = [
-  { label: "Physiotherapy Equipments", href: "/physiotherapy-equipments" },
-  { label: "Oxygen Concentrators", href: "/oxygen-concentrators" },
+  { label: "Physiotherapy Equipments", href: "/physiotherapy/equipments" },
+  { label: "Oxygen Equipments", href: "/oxygen-equipment" },
   {
-    label: "Wheelchair, Walkers & Crutches",
+    label: "Wheelchairs and Walking Aids",
     href: "/wheelchairs-walkers-crutches",
-  },
-  { label: "BiPAP Machines", href: "/bipap-machines" },
-  { label: "Other Medical Equipments", href: "/other-medical-equipments" },
+  }
 ];
 
 function DropdownMenu({
