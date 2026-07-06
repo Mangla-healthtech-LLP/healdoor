@@ -14,9 +14,9 @@ import Link from "next/link";
 import { Logo } from "@healdoor/ui";
 
 const servicesDropdown = [
-  { label: "Physiotherapy", href: "/services/physiotherapy" },
-  { label: "Doctor Consultation", href: "/services/doctor-consultation" },
-  { label: "Disease Prevention/ Diet Plan", href: "/services/disease-prevention" },
+  { label: "Physiotherapy", href: "/physiotherapy" },
+  { label: "Doctor Consultation", href: "/doctor-consultation" },
+  { label: "Disease Prevention/ Diet Plan", href: "/disease-prevention" },
   { label: "ICU setup at Home", href: "/services/icu-at-home" },
   { label: "Blood tests at Home", href: "/services/investigations-at-home" },
 ];
