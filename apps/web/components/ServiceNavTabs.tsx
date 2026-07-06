@@ -14,7 +14,7 @@ import {
 
 const serviceTabs = [
   {
-    title: "Physio at Home",
+    title: "Physiotherapy",
     href: "/physiotherapy",
     icon: Activity,
   },
