@@ -13,9 +13,9 @@ export function ProductGridBlock({
   displayMode = "both",
   products,
 }: ProductGridBlockData) {
-  const [mode, setMode] = useState<"rent" | "buy">(
-    displayMode === "buy" ? "buy" : "rent"
-  );
+  const [mode, setMode] = useState<'rent' | 'buy'>(
+    displayMode === 'rent' ? 'rent' : 'buy',
+  )
 
   if (!products || products.length === 0) return null;
 
