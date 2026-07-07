@@ -20,6 +20,30 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+function extractTextFromLexical(content: unknown): string {
+  if (typeof content === 'string') return content
+  if (!content || typeof content !== 'object') return ''
+
+  const root = (content as { root?: unknown }).root
+  if (!root || typeof root !== 'object') return ''
+
+  const children = (root as { children?: unknown[] }).children ?? []
+
+  return children
+    .map((child) => {
+      if (!child || typeof child !== 'object') return ''
+
+      const node = child as { text?: unknown; children?: unknown[] }
+      if (typeof node.text === 'string') return node.text
+      if (Array.isArray(node.children)) {
+        return extractTextFromLexical({ root: { children: node.children } })
+      }
+
+      return ''
+    })
+    .join(' ')
+}
+
 export default async function SearchPage({ searchParams }: Props) {
   const params = await searchParams
   const q = typeof params.q === 'string' ? params.q.toLowerCase() : ''
@@ -35,12 +59,13 @@ export default async function SearchPage({ searchParams }: Props) {
     ? products.filter((p) => p.name.toLowerCase().includes(q))
     : []
   const filteredServices = q
-    ? services.filter(
-        (s) =>
+    ? services.filter((s) => {
+        const descriptionText = extractTextFromLexical(s.description)
+        return (
           s.name.toLowerCase().includes(q) ||
-          (typeof s.description === 'string' &&
-            s.description.toLowerCase().includes(q)),
-      )
+          descriptionText.toLowerCase().includes(q)
+        )
+      })
     : []
 
   return (
@@ -83,8 +108,7 @@ export default async function SearchPage({ searchParams }: Props) {
             <div className="text-center py-20 bg-white rounded-2xl border border-border/30">
               <Search className="w-12 h-12 text-teal mx-auto mb-4" />
               <p className="text-text-muted text-lg">
-                Please enter a search term above to find what you're looking
-                for.
+                Please enter a search term above to find what you&apos;re looking for.
               </p>
             </div>
           ) : (
@@ -108,7 +132,7 @@ export default async function SearchPage({ searchParams }: Props) {
                 {filteredServices.length === 0 ? (
                   <div className="bg-white p-8 rounded-xl border border-border/50 text-center">
                     <p className="text-text-muted">
-                      No services found for "{q}"
+                      No services found for &quot;{q}&quot;
                     </p>
                   </div>
                 ) : (
@@ -175,7 +199,7 @@ export default async function SearchPage({ searchParams }: Props) {
                 {filteredProducts.length === 0 ? (
                   <div className="bg-white p-8 rounded-xl border border-border/50 text-center">
                     <p className="text-text-muted">
-                      No products found for "{q}"
+                      No products found for &quot;{q}&quot;
                     </p>
                   </div>
                 ) : (
