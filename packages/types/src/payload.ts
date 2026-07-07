@@ -225,6 +225,10 @@ export interface HomepageSettings {
     description?: string | null
     doctors?: DoctorProfile[]
   }
+  doctorReelsSection?: {
+    heading?: string | null
+    description?: string | null
+  }
   testimonialsSection?: {
     heading?: string | null
     description?: string | null
