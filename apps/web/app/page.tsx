@@ -1,57 +1,63 @@
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { HeroCarousel } from "@/components/home/HeroCarousel";
-import { HealthcareIntro } from "@/components/home/HealthcareIntro";
-import { ServiceCategoriesGrid } from "@/components/home/ServiceCategoriesGrid";
-import { TrustBadges } from "@/components/home/TrustBadges";
-import { ProblemsSection } from "@/components/home/ProblemsSection";
+import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
+import { HeroCarousel } from '@/components/home/HeroCarousel'
+import { HealthcareIntro } from '@/components/home/HealthcareIntro'
+import { ServiceCategoriesGrid } from '@/components/home/ServiceCategoriesGrid'
+import { TrustBadges } from '@/components/home/TrustBadges'
+import { ProblemsSection } from '@/components/home/ProblemsSection'
 // import { HighestSellingProducts } from "@/components/home/HighestSellingProducts";
-import { RentOrBuySection } from "@/components/home/RentOrBuySection";
-import { ExpertDoctors } from "@/components/home/ExpertDoctors";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { BeforeAfterSection } from "@/components/home/BeforeAfterSection";
-import { OurStorySection } from "@/components/home/OurStorySection";
-import { BlogsSection } from "@/components/home/BlogsSection";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { LocationSection } from "@/components/home/LocationSection";
-import { CookieBanner } from "@/components/CookieBanner";
+import { RentOrBuySection } from '@/components/home/RentOrBuySection'
+import { ExpertDoctors } from '@/components/home/ExpertDoctors'
+import { DoctorReelsSection } from '@/components/home/DoctorReelsSection'
+import { TestimonialsSection } from '@/components/home/TestimonialsSection'
+import { BeforeAfterSection } from '@/components/home/BeforeAfterSection'
+import { OurStorySection } from '@/components/home/OurStorySection'
+import { BlogsSection } from '@/components/home/BlogsSection'
+import { HowItWorks } from '@/components/home/HowItWorks'
+import { LocationSection } from '@/components/home/LocationSection'
+import { CookieBanner } from '@/components/CookieBanner'
 import {
   getHomepageSettings,
   getBlogs,
   getTestimonials,
+  getDoctorReels,
   getFeaturedProducts,
-} from "@healdoor/utils";
+} from '@healdoor/utils'
 
 async function getHomeData() {
   try {
-    const [homepage, blogsRes, testimonials, products] = await Promise.all([
-      getHomepageSettings().catch(() => null),
-      getBlogs({ limit: 4 }).catch(() => null),
-      getTestimonials().catch(() => []),
-      getFeaturedProducts().catch(() => []),
-    ]);
+    const [homepage, blogsRes, testimonials, doctorReels, products] =
+      await Promise.all([
+        getHomepageSettings().catch(() => null),
+        getBlogs({ limit: 4 }).catch(() => null),
+        getTestimonials().catch(() => []),
+        getDoctorReels().catch(() => []),
+        getFeaturedProducts().catch(() => []),
+      ])
 
     return {
       homepage,
       blogs: blogsRes?.docs ?? [],
       testimonials,
+      doctorReels,
       products,
-    };
+    }
   } catch {
     return {
       homepage: null,
       blogs: [],
       testimonials: [],
+      doctorReels: [],
       products: [],
-    };
+    }
   }
 }
 
 export default async function Home() {
-  const { homepage, blogs, testimonials, products } = await getHomeData();
+  const { homepage, blogs, testimonials, doctorReels, products } =
+    await getHomeData()
 
-  // Products for rent/buy section — filter available for rent
-  const rentProducts = products.filter((p) => p.isAvailableForRent !== false);
+  // Products for rent/buy section will be filtered dynamically inside the component
 
   return (
     <>
@@ -78,7 +84,7 @@ export default async function Home() {
         <RentOrBuySection
           heading={homepage?.rentOrBuySection?.heading}
           description={homepage?.rentOrBuySection?.description}
-          products={rentProducts.length > 0 ? rentProducts : undefined}
+          products={products.length > 0 ? products : undefined}
           rentBenefits={homepage?.rentOrBuySection?.rentBenefits}
           buyBenefits={homepage?.rentOrBuySection?.buyBenefits}
         />
@@ -86,6 +92,11 @@ export default async function Home() {
           heading={homepage?.expertDoctorsSection?.heading}
           description={homepage?.expertDoctorsSection?.description}
           doctors={homepage?.expertDoctorsSection?.doctors}
+        />
+        <DoctorReelsSection
+          heading={homepage?.doctorReelsSection?.heading}
+          description={homepage?.doctorReelsSection?.description}
+          reels={doctorReels.length > 0 ? doctorReels : undefined}
         />
         <TestimonialsSection
           heading={homepage?.testimonialsSection?.heading}
@@ -123,5 +134,5 @@ export default async function Home() {
       <Footer />
       <CookieBanner />
     </>
-  );
+  )
 }

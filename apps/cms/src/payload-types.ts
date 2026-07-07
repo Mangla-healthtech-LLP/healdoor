@@ -74,6 +74,7 @@ export interface Config {
     pages: Page;
     blogs: Blog;
     testimonials: Testimonial;
+    'doctor-reels': DoctorReel;
     faqs: Faq;
     products: Product;
     'product-categories': ProductCategory;
@@ -91,6 +92,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'doctor-reels': DoctorReelsSelect<false> | DoctorReelsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
@@ -745,6 +747,36 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctor-reels".
+ */
+export interface DoctorReel {
+  id: number;
+  doctorName: string;
+  /**
+   * Profile photo or video thumbnail (used as fallback)
+   */
+  thumbnail?: (number | null) | Media;
+  /**
+   * MP4 video file for the reel
+   */
+  videoFile?: (number | null) | Media;
+  /**
+   * Short description text displayed over the video
+   */
+  description?: string | null;
+  /**
+   * Instagram post/reel URL
+   */
+  instagramLink?: string | null;
+  /**
+   * Show verified badge next to name/handle
+   */
+  isVerified?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -794,6 +826,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'doctor-reels';
+        value: number | DoctorReel;
       } | null)
     | ({
         relationTo: 'faqs';
@@ -1257,6 +1293,20 @@ export interface TestimonialsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctor-reels_select".
+ */
+export interface DoctorReelsSelect<T extends boolean = true> {
+  doctorName?: T;
+  thumbnail?: T;
+  videoFile?: T;
+  description?: T;
+  instagramLink?: T;
+  isVerified?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faqs_select".
  */
 export interface FaqsSelect<T extends boolean = true> {
@@ -1483,6 +1533,10 @@ export interface HomepageSetting {
     heading?: string | null;
     description?: string | null;
   };
+  doctorReelsSection?: {
+    heading?: string | null;
+    description?: string | null;
+  };
   beforeAfterSection?: {
     heading?: string | null;
     description?: string | null;
@@ -1689,6 +1743,12 @@ export interface HomepageSettingsSelect<T extends boolean = true> {
             };
       };
   testimonialsSection?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  doctorReelsSection?:
     | T
     | {
         heading?: T;

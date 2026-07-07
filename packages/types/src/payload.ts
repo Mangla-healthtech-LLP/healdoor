@@ -109,6 +109,17 @@ export interface Testimonial {
   isVerified?: boolean
 }
 
+// Doctor Reel
+export interface DoctorReel {
+  id: number
+  doctorName: string
+  thumbnail?: MediaItem | number | null
+  videoFile?: MediaItem | number | null
+  description?: string | null
+  instagramLink?: string | null
+  isVerified?: boolean
+}
+
 // ── Homepage Settings Global ──
 
 export interface HeroSlide {

@@ -1,4 +1,4 @@
-import type { Page, Blog, Service, Product, Testimonial, HomepageSettings, PayloadResponse } from '@healdoor/types'
+import type { Page, Blog, Service, Product, Testimonial, HomepageSettings, PayloadResponse, DoctorReel } from '@healdoor/types'
 
 const CMS_URL = process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3001'
 const API_KEY = process.env.PAYLOAD_API_KEY || ''
@@ -103,3 +103,12 @@ export async function getTestimonials(params?: {
   return data.docs
 }
 
+// Doctor Reels
+export async function getDoctorReels(params?: {
+  limit?: number
+}): Promise<DoctorReel[]> {
+  const { limit = 20 } = params ?? {}
+  const query = `/doctor-reels?depth=1&limit=${limit}`
+  const data = await fetchPayload<PayloadResponse<DoctorReel>>(query)
+  return data.docs
+}
