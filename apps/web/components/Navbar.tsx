@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react'
 import {
   PhoneCall,
   Search,
@@ -9,28 +9,26 @@ import {
   ChevronDown,
   Menu,
   X,
-} from "lucide-react";
-import Link from "next/link";
-import { Logo } from "@healdoor/ui";
+} from 'lucide-react'
+import Link from 'next/link'
+import { Logo } from '@healdoor/ui'
 
 const servicesDropdown = [
-  { label: "Physio at Home", href: "/services/physiotherapy" },
-  { label: "Oxygen Equipment at Home", href: "/services/oxygen-equipment" },
-  { label: "ICU at Home", href: "/services/icu-at-home" },
-  { label: "Investigation at Home", href: "/services/investigations-at-home" },
-  { label: "Nursing & Elderly Care", href: "/services/nursing-elderly-care-gda" },
-];
+  { label: 'Physiotherapy', href: '/physiotherapy' },
+  { label: 'Doctor Consultation', href: '/doctor-consultation' },
+  { label: 'Disease Prevention/ Diet Plan', href: '/disease-prevention' },
+  { label: 'ICU setup at Home', href: '/services/icu-at-home' },
+  { label: 'Blood tests at Home', href: '/services/investigations-at-home' },
+]
 
 const equipmentsDropdown = [
-  { label: "Physiotherapy Equipments", href: "/physiotherapy-equipments" },
-  { label: "Oxygen Concentrators", href: "/oxygen-concentrators" },
+  { label: 'Physiotherapy Equipments', href: '/physiotherapy/equipments' },
+  { label: 'Oxygen Equipments', href: '/oxygen-equipment' },
   {
-    label: "Wheelchair, Walkers & Crutches",
-    href: "/wheelchairs-walkers-crutches",
+    label: 'Wheelchairs and Walking Aids',
+    href: '/wheelchairs-walkers-crutches',
   },
-  { label: "BiPAP Machines", href: "/bipap-machines" },
-  { label: "Other Medical Equipments", href: "/other-medical-equipments" },
-];
+]
 
 function DropdownMenu({
   label,
@@ -38,22 +36,22 @@ function DropdownMenu({
   isOpen,
   onToggle,
 }: {
-  label: string;
-  items: { label: string; href: string }[];
-  isOpen: boolean;
-  onToggle: () => void;
+  label: string
+  items: { label: string; href: string }[]
+  isOpen: boolean
+  onToggle: () => void
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        if (isOpen) onToggle();
+        if (isOpen) onToggle()
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen, onToggle]);
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isOpen, onToggle])
 
   return (
     <div className="relative" ref={ref}>
@@ -64,7 +62,7 @@ function DropdownMenu({
       >
         {label}
         <ChevronDown
-          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -83,12 +81,12 @@ function DropdownMenu({
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export function Navbar() {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white backdrop-blur supports-[backdrop-filter]:bg-whitebg-gradient-to-br border-b border-border/50 shadow-sm">
@@ -122,16 +120,20 @@ export function Navbar() {
 
         {/* Search Bar */}
         <div className="hidden md:flex flex-1 max-w-sm mx-4">
-          <div className="relative w-full">
+          <form action="/search" method="GET" className="relative w-full">
             <input
+              name="q"
               type="text"
               placeholder="Search for products or services..."
               className="w-full h-10 pl-4 pr-12 text-sm border border-border rounded-full bg-section-alt-bg focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal placeholder:text-text-muted transition-all"
             />
-            <button className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center hover:bg-teal-dark transition-colors cursor-pointer">
+            <button
+              type="submit"
+              className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center hover:bg-teal-dark transition-colors cursor-pointer"
+            >
               <Search className="h-4 w-4" />
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Right Actions */}
@@ -157,6 +159,7 @@ export function Navbar() {
             <PhoneCall className="h-4 w-4" />
             <span className="hidden sm:inline">Call Us</span>
           </a>
+
           <Link
             href="/contact"
             className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-teal px-4 text-sm font-semibold text-white shadow-md hover:bg-teal-dark transition-colors"
@@ -184,16 +187,20 @@ export function Navbar() {
         <div className="lg:hidden border-t border-border bg-white animate-slide-in-right">
           <div className="container py-4 space-y-4">
             {/* Mobile search */}
-            <div className="md:hidden relative">
+            <form action="/search" method="GET" className="md:hidden relative">
               <input
+                name="q"
                 type="text"
                 placeholder="Search for products or services..."
                 className="w-full h-10 pl-4 pr-12 text-sm border border-border rounded-full bg-section-alt-bg focus:outline-none focus:ring-2 focus:ring-teal/30"
               />
-              <button className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center cursor-pointer">
+              <button
+                type="submit"
+                className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center cursor-pointer"
+              >
                 <Search className="h-4 w-4" />
               </button>
-            </div>
+            </form>
 
             <div className="space-y-1">
               <p className="text-xs font-semibold text-text-muted uppercase tracking-wider px-2">
@@ -226,6 +233,7 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
+
             <div className="pt-2 border-t border-border/50">
               <Link
                 href="/contact"
