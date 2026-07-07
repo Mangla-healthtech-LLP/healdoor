@@ -95,12 +95,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-          <Logo
-            width={160}
-            height={60}
-            className="w-auto h-12"
-            priority
-          />
+          <Logo width={160} height={60} className="w-auto h-12" priority />
         </Link>
 
         {/* Desktop Navigation */}
@@ -108,18 +103,18 @@ export function Navbar() {
           <DropdownMenu
             label="Services"
             items={servicesDropdown}
-            isOpen={openDropdown === "services"}
+            isOpen={openDropdown === 'services'}
             onToggle={() =>
-              setOpenDropdown(openDropdown === "services" ? null : "services")
+              setOpenDropdown(openDropdown === 'services' ? null : 'services')
             }
           />
           <DropdownMenu
             label="Equipments"
             items={equipmentsDropdown}
-            isOpen={openDropdown === "equipments"}
+            isOpen={openDropdown === 'equipments'}
             onToggle={() =>
               setOpenDropdown(
-                openDropdown === "equipments" ? null : "equipments",
+                openDropdown === 'equipments' ? null : 'equipments',
               )
             }
           />
@@ -156,12 +151,18 @@ export function Navbar() {
           </button>
 
           <a
-            href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || "+919871281574"}`}
+            href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919871281574'}`}
             className="inline-flex h-9 items-center gap-2 rounded-full bg-orange px-4 text-sm font-semibold text-white shadow-md hover:bg-orange-hover transition-colors"
           >
             <PhoneCall className="h-4 w-4" />
             <span className="hidden sm:inline">Call Us</span>
           </a>
+          <Link
+            href="/contact"
+            className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-teal px-4 text-sm font-semibold text-white shadow-md hover:bg-teal-dark transition-colors"
+          >
+            Contact Us
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -225,9 +226,18 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
+            <div className="pt-2 border-t border-border/50">
+              <Link
+                href="/contact"
+                className="block px-3 py-2 text-sm font-semibold text-teal hover:bg-teal-light rounded-lg transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       )}
     </nav>
-  );
+  )
 }
