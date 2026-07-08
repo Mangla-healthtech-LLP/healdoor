@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react'
 import {
   PhoneCall,
   Search,
@@ -9,26 +9,26 @@ import {
   ChevronDown,
   Menu,
   X,
-} from "lucide-react";
-import Link from "next/link";
-import { Logo } from "@healdoor/ui";
+} from 'lucide-react'
+import Link from 'next/link'
+import { Logo } from '@healdoor/ui'
 
 const servicesDropdown = [
-  { label: "Physiotherapy", href: "/physiotherapy" },
-  { label: "Doctor Consultation", href: "/doctor-consultation" },
-  { label: "Disease Prevention/ Diet Plan", href: "/disease-prevention" },
-  { label: "ICU setup at Home", href: "/services/icu-at-home" },
-  { label: "Blood tests at Home", href: "/services/investigations-at-home" },
-];
+  { label: 'Physiotherapy', href: '/physiotherapy' },
+  { label: 'Doctor Consultation', href: '/doctor-consultation' },
+  { label: 'Disease Prevention/ Diet Plan', href: '/disease-prevention' },
+  { label: 'ICU setup at Home', href: '/services/icu-at-home' },
+  { label: 'Blood tests at Home', href: '/services/investigations-at-home' },
+]
 
 const equipmentsDropdown = [
-  { label: "Physiotherapy Equipments", href: "/physiotherapy/equipments" },
-  { label: "Oxygen Equipments", href: "/oxygen-equipment" },
+  { label: 'Physiotherapy Equipments', href: '/physiotherapy/equipments' },
+  { label: 'Oxygen Equipments', href: '/oxygen-equipment' },
   {
-    label: "Wheelchairs and Walking Aids",
-    href: "/wheelchairs-walkers-crutches",
-  }
-];
+    label: 'Wheelchairs and Walking Aids',
+    href: '/wheelchairs-walkers-crutches',
+  },
+]
 
 function DropdownMenu({
   label,
@@ -36,22 +36,22 @@ function DropdownMenu({
   isOpen,
   onToggle,
 }: {
-  label: string;
-  items: { label: string; href: string }[];
-  isOpen: boolean;
-  onToggle: () => void;
+  label: string
+  items: { label: string; href: string }[]
+  isOpen: boolean
+  onToggle: () => void
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        if (isOpen) onToggle();
+        if (isOpen) onToggle()
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen, onToggle]);
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isOpen, onToggle])
 
   return (
     <div className="relative" ref={ref}>
@@ -62,7 +62,7 @@ function DropdownMenu({
       >
         {label}
         <ChevronDown
-          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -81,24 +81,19 @@ function DropdownMenu({
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export function Navbar() {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white backdrop-blur supports-[backdrop-filter]:bg-whitebg-gradient-to-br border-b border-border/50 shadow-sm">
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-          <Logo
-            width={160}
-            height={60}
-            className="w-auto h-12"
-            priority
-          />
+          <Logo width={160} height={60} className="w-auto h-12" priority />
         </Link>
 
         {/* Desktop Navigation */}
@@ -106,18 +101,18 @@ export function Navbar() {
           <DropdownMenu
             label="Services"
             items={servicesDropdown}
-            isOpen={openDropdown === "services"}
+            isOpen={openDropdown === 'services'}
             onToggle={() =>
-              setOpenDropdown(openDropdown === "services" ? null : "services")
+              setOpenDropdown(openDropdown === 'services' ? null : 'services')
             }
           />
           <DropdownMenu
             label="Equipments"
             items={equipmentsDropdown}
-            isOpen={openDropdown === "equipments"}
+            isOpen={openDropdown === 'equipments'}
             onToggle={() =>
               setOpenDropdown(
-                openDropdown === "equipments" ? null : "equipments",
+                openDropdown === 'equipments' ? null : 'equipments',
               )
             }
           />
@@ -125,16 +120,20 @@ export function Navbar() {
 
         {/* Search Bar */}
         <div className="hidden md:flex flex-1 max-w-sm mx-4">
-          <div className="relative w-full">
+          <form action="/search" method="GET" className="relative w-full">
             <input
+              name="q"
               type="text"
               placeholder="Search for products or services..."
               className="w-full h-10 pl-4 pr-12 text-sm border border-border rounded-full bg-section-alt-bg focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal placeholder:text-text-muted transition-all"
             />
-            <button className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center hover:bg-teal-dark transition-colors cursor-pointer">
+            <button
+              type="submit"
+              className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center hover:bg-teal-dark transition-colors cursor-pointer"
+            >
               <Search className="h-4 w-4" />
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Right Actions */}
@@ -154,12 +153,19 @@ export function Navbar() {
           </button> */}
 
           <a
-            href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || "+919871281574"}`}
+            href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919871281574'}`}
             className="inline-flex h-9 items-center gap-2 rounded-full bg-orange px-4 text-sm font-semibold text-white shadow-md hover:bg-orange-hover transition-colors"
           >
             <PhoneCall className="h-4 w-4" />
             <span className="hidden sm:inline">Call Us</span>
           </a>
+
+          <Link
+            href="/contact"
+            className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-teal px-4 text-sm font-semibold text-white shadow-md hover:bg-teal-dark transition-colors"
+          >
+            Contact Us
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -181,16 +187,20 @@ export function Navbar() {
         <div className="lg:hidden border-t border-border bg-white animate-slide-in-right">
           <div className="container py-4 space-y-4">
             {/* Mobile search */}
-            <div className="md:hidden relative">
+            <form action="/search" method="GET" className="md:hidden relative">
               <input
+                name="q"
                 type="text"
                 placeholder="Search for products or services..."
                 className="w-full h-10 pl-4 pr-12 text-sm border border-border rounded-full bg-section-alt-bg focus:outline-none focus:ring-2 focus:ring-teal/30"
               />
-              <button className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center cursor-pointer">
+              <button
+                type="submit"
+                className="absolute right-1 top-1 h-8 w-8 rounded-full bg-teal text-white flex items-center justify-center cursor-pointer"
+              >
                 <Search className="h-4 w-4" />
               </button>
-            </div>
+            </form>
 
             <div className="space-y-1">
               <p className="text-xs font-semibold text-text-muted uppercase tracking-wider px-2">
@@ -223,9 +233,19 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
+
+            <div className="pt-2 border-t border-border/50">
+              <Link
+                href="/contact"
+                className="block px-3 py-2 text-sm font-semibold text-teal hover:bg-teal-light rounded-lg transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       )}
     </nav>
-  );
+  )
 }

@@ -55,7 +55,7 @@ export function RentOrBuySection({
   rentBenefits,
   buyBenefits,
 }: RentOrBuySectionProps) {
-  const [mode, setMode] = useState<"rent" | "buy">("rent");
+  const [mode, setMode] = useState<'rent' | 'buy'>('buy')
   const data = products && products.length > 0 ? products : defaultRentProducts;
   const rBenefits = rentBenefits && rentBenefits.length > 0
     ? rentBenefits.map((b) => b.text)

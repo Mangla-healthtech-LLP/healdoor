@@ -15,6 +15,7 @@ import { Testimonials } from './collections/Testimonials'
 import { FAQs } from './collections/FAQs'
 import { Products } from './collections/Products'
 import { ProductCategories } from './collections/ProductCategories'
+import { DoctorReels } from './collections/DoctorReels'
 import { HomepageSettings } from './globals'
 import { s3Storage } from '@payloadcms/storage-s3'
 
@@ -51,7 +52,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Services, Leads, Pages, Blogs, Testimonials, FAQs, Products, ProductCategories],
+  collections: [Users, Media, Services, Leads, Pages, Blogs, Testimonials, FAQs, Products, DoctorReels, ProductCategories],
   globals: [HomepageSettings],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

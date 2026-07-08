@@ -34,7 +34,7 @@ export function ProductCatalog({ initialProducts, categories }: ProductCatalogPr
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [sortBy, setSortBy] = useState("default");
-  const [mode, setMode] = useState<"rent" | "buy">("rent");
+  const [mode, setMode] = useState<"rent" | "buy">("buy");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const filteredAndSortedProducts = useMemo(() => {
