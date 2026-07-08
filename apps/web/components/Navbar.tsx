@@ -138,7 +138,7 @@ export function Navbar() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-3">
-          <button
+          {/* <button
             className="relative p-2 text-text-body hover:text-teal transition-colors cursor-pointer hidden sm:flex"
             aria-label="Shopping cart"
           >
@@ -150,7 +150,7 @@ export function Navbar() {
             aria-label="User profile"
           >
             <User className="h-5 w-5" />
-          </button>
+          </button> */}
 
           <a
             href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919871281574'}`}

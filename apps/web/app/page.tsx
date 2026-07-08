@@ -58,6 +58,8 @@ export default async function Home() {
     await getHomeData()
 
   // Products for rent/buy section will be filtered dynamically inside the component
+  // Products for rent/buy section — filter available for rent
+  // const rentProducts = products.filter((p) => p.isAvailableForRent !== false);
 
   return (
     <>

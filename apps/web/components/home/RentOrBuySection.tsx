@@ -8,6 +8,7 @@ import {
   Check,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Product } from "@healdoor/types";
 import { getMediaUrl, getMediaAlt } from "@healdoor/utils";
 
@@ -106,7 +107,13 @@ export function RentOrBuySection({
 
         {/* Product cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {data.map((product, index) => {
+          {data
+            .filter((product) => {
+              if (mode === "rent") return (product as Product).isAvailableForRent !== false;
+              if (mode === "buy") return (product as Product).isAvailableForPurchase !== false;
+              return true;
+            })
+            .map((product, index) => {
             const imageUrl =
               getMediaUrl((product as Product).image as Parameters<typeof getMediaUrl>[0]) ||
               fallbackImages[index] ||
@@ -117,9 +124,10 @@ export function RentOrBuySection({
                 : (product as Product).buyPrice;
 
             return (
-              <div
+              <Link
+                href={`/products/${product.slug}`}
                 key={(product as Product).id || product.slug || index}
-                className="bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+                className="block bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
               >
                 <div className="aspect-[4/3] bg-section-alt-bg relative overflow-hidden">
                   <Image
@@ -157,7 +165,7 @@ export function RentOrBuySection({
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
