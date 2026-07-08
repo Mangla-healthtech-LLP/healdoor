@@ -164,7 +164,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       >
         <ChevronRight className="h-8 w-8 sm:h-5 sm:w-5 text-text-body opacity-50 sm:opacity-100" />
       </button>
-
+      
       {/* Dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
         {data.map((s, i) => (

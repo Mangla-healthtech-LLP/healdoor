@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import logoSrc from './assets/logo_white_bg.svg'
+import logoSrc from './assets/logo.png'
 
 export const Logo: React.FC<{ className?: string, width?: number, height?: number, priority?: boolean }> = ({ 
   className, 

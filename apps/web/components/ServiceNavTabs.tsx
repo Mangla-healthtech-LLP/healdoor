@@ -14,7 +14,7 @@ import {
 
 const serviceTabs = [
   {
-    title: "Physio at Home",
+    title: "Physiotherapy",
     href: "/physiotherapy",
     icon: Activity,
   },
@@ -26,7 +26,7 @@ const serviceTabs = [
   },
   {
     title: "Investigation at Home",
-    href: "/investigations-at-home",
+    href: "/services/investigations-at-home",
     icon: Microscope,
   },
   {
@@ -36,12 +36,12 @@ const serviceTabs = [
   },
   {
     title: "ICU at Home",
-    href: "/icu-at-home",
+    href: "/services/icu-at-home",
     icon: BedDouble,
   },
   {
     title: "Other Medical Equipments",
-    href: "/other-medical-equipments",
+    href: "/products",
     icon: Stethoscope,
   },
 ];
