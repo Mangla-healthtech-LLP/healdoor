@@ -98,28 +98,30 @@ export function PricingGridBlock({
                   </ul>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 w-full mt-auto">
+                <div className="flex flex-row gap-2 sm:gap-3 w-full mt-auto">
                   <Link
                     href={`/contact?service=${fullServiceSlug}`}
-                    className={`flex-1 flex justify-center items-center gap-2 h-12 rounded-xl font-semibold transition-colors ${
+                    className={`flex-1 flex justify-center items-center gap-1.5 sm:gap-2 h-12 rounded-xl font-semibold text-sm sm:text-base px-1 sm:px-4 transition-colors ${
                       isPopular
                         ? 'bg-teal hover:bg-teal-dark text-white shadow-md shadow-teal/20'
                         : 'bg-teal/10 hover:bg-teal hover:text-white text-teal'
                     }`}
                   >
-                    <CalendarPlus className="w-4 h-4" />
-                    {plan.buttonText || 'Book Now'}
+                    <CalendarPlus className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                    <span className="truncate">
+                      {plan.buttonText || 'Book Now'}
+                    </span>
                   </Link>
                   <a
                     href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE || '+919871281574'}`}
-                    className={`flex-1 flex justify-center items-center gap-2 h-12 rounded-xl font-semibold transition-colors border-2 ${
+                    className={`flex-1 flex justify-center items-center gap-1.5 sm:gap-2 h-12 rounded-xl font-semibold text-sm sm:text-base px-1 sm:px-4 transition-colors border-2 ${
                       isPopular
                         ? 'border-teal/20 hover:border-teal text-teal hover:bg-teal/5'
                         : 'border-border/50 hover:border-teal text-text-dark hover:bg-teal/5'
                     }`}
                   >
-                    <Phone className="w-4 h-4" />
-                    Call Us
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                    <span className="whitespace-nowrap">Call Us</span>
                   </a>
                 </div>
               </div>
