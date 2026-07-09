@@ -55,7 +55,7 @@ export function RentOrBuySection({
   rentBenefits,
   buyBenefits,
 }: RentOrBuySectionProps) {
-  const [mode, setMode] = useState<'rent' | 'buy'>('buy')
+  const [mode, setMode] = useState<"rent" | "buy">("buy");
   const data = products && products.length > 0 ? products : defaultRentProducts;
   const rBenefits = rentBenefits && rentBenefits.length > 0
     ? rentBenefits.map((b) => b.text)
@@ -106,13 +106,14 @@ export function RentOrBuySection({
         </div>
 
         {/* Product cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
           {data
             .filter((product) => {
               if (mode === "rent") return (product as Product).isAvailableForRent !== false;
               if (mode === "buy") return (product as Product).isAvailableForPurchase !== false;
               return true;
             })
+            .slice(0, 8)
             .map((product, index) => {
             const imageUrl =
               getMediaUrl((product as Product).image as Parameters<typeof getMediaUrl>[0]) ||
@@ -127,8 +128,15 @@ export function RentOrBuySection({
               <Link
                 href={`/products/${product.slug}`}
                 key={(product as Product).id || product.slug || index}
-                className="block bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+                className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] block bg-white rounded-xl border border-border/50 overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group relative"
               >
+                {index < 2 && (
+                  <div className="absolute top-2 left-2 z-10">
+                    <span className="bg-orange text-white text-[10px] sm:text-xs font-bold uppercase px-2 py-1 rounded shadow-sm">
+                      Highest Selling
+                    </span>
+                  </div>
+                )}
                 <div className="aspect-[4/3] bg-section-alt-bg relative overflow-hidden">
                   <Image
                     src={imageUrl}
@@ -168,6 +176,16 @@ export function RentOrBuySection({
               </Link>
             );
           })}
+        </div>
+
+        {/* View More Button */}
+        <div className="flex justify-center mb-10">
+          <Link
+            href="/products"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-teal text-white rounded-full font-bold hover:bg-teal-dark transition-colors shadow-md shadow-teal/20"
+          >
+            View More Products
+          </Link>
         </div>
 
         {/* Benefits banner */}
