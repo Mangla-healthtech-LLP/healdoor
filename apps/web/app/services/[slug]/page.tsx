@@ -160,7 +160,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                     <p className="text-sm text-text-muted text-center">
                       Or call us directly at <br />
                       <a href="tel:+919876543210" className="font-bold text-teal text-lg mt-1 block">
-                        +91 98765 43210
+                        +91 98712 81574
                       </a>
                     </p>
                   </div>
