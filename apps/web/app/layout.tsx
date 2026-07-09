@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SchemaMarkup } from "../components/SchemaMarkup";
 import { MetaPixel } from "../components/MetaPixel";
 import { FloatingCTAs } from "../components/FloatingCTAs";
@@ -99,6 +100,7 @@ export default function RootLayout({
         <FloatingCTAs />
         <SchemaMarkup schema={organizationSchema} />
         <MetaPixel />
+        <SpeedInsights />
       </body>
       {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
       {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
