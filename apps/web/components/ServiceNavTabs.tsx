@@ -36,7 +36,7 @@ const serviceTabs = [
   },
   {
     title: "ICU at Home",
-    href: "/services/icu-at-home",
+    href: "/icu-at-home",
     icon: BedDouble,
   },
   {
