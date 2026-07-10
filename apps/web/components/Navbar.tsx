@@ -28,6 +28,10 @@ const equipmentsDropdown = [
     label: 'Wheelchairs and Walking Aids',
     href: '/wheelchairs-walkers-crutches',
   },
+  {
+    label: 'ICU Equipments',
+      href: '/icu-at-home'
+  },
 ]
 
 function DropdownMenu({
