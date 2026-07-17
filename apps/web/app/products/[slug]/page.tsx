@@ -205,12 +205,12 @@ export default async function ProductDetailPage({ params }: Props) {
                       <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                     </Link>
                     <a
-                      href="tel:+919876543210"
+                      href="tel:+919871281574"
                       className="flex-1 flex justify-center items-center gap-1.5 sm:gap-2 px-1 sm:px-4 py-3 sm:py-3.5 bg-white border-2 border-teal text-teal hover:bg-teal/5 rounded-xl font-bold text-sm sm:text-base transition-colors"
                     >
                       <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                       <span className="whitespace-nowrap tracking-tighter sm:tracking-normal text-[13px] sm:text-base">
-                        +91 98765 43210
+                        +91 98712 81574
                       </span>
                     </a>
                   </div>
