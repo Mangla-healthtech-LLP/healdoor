@@ -12,6 +12,7 @@ import {
   ProductCollectionBlock,
   PricingGridBlock,
   ItemGridBlock,
+  ClinicInfoBlock,
 } from '../blocks'
 
 export const Pages: CollectionConfig = {
@@ -61,6 +62,7 @@ export const Pages: CollectionConfig = {
         ProductCollectionBlock,
         PricingGridBlock,
         ItemGridBlock,
+        ClinicInfoBlock,
       ],
     },
     {

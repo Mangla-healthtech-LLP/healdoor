@@ -27,6 +27,13 @@ export const PricingGridBlock: Block = {
           required: true,
         },
         {
+          name: 'subtitle',
+          type: 'text',
+          admin: {
+            description: 'Label above the price, e.g. "Starting from"',
+          },
+        },
+        {
           name: 'price',
           type: 'text',
           required: true,
