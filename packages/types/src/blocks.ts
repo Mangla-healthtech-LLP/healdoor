@@ -114,6 +114,7 @@ export interface PricingGridBlockData {
   sectionDescription?: string | null
   plans: {
     title: string
+    subtitle?: string | null
     price: string
     billingPeriod?: string | null
     isPopular?: boolean | null
@@ -142,6 +143,21 @@ export interface ItemGridBlockData {
   }[]
 }
 
+export interface ClinicInfoBlockData {
+  blockType: 'clinicInfo'
+  id?: string
+  clinicName?: string | null
+  address?: string | null
+  timings?: string | null
+  receptionPhone?: string | null
+  enquiryPhone?: string | null
+  facilities?: {
+    text: string
+    id?: string | null
+  }[] | null
+  mapEmbedUrl?: string | null
+}
+
 export type LayoutBlock =
   | HeroBlockData
   | CTABlockData
@@ -154,4 +170,5 @@ export type LayoutBlock =
   | DoctorGridBlockData
   | PricingGridBlockData
   | ItemGridBlockData
+  | ClinicInfoBlockData
 

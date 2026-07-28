@@ -77,7 +77,7 @@ export function ExpertDoctors({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto items-end">
+        <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto items-stretch">
           {data.map((doctor, index) => {
             const isHighlighted = !!doctor.badge;
             const imageUrl =
@@ -93,21 +93,21 @@ export function ExpertDoctors({
             return (
               <div
                 key={doctor.id || doctor.name}
-                className={`bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 relative ${
+                className={`w-full sm:w-[280px] md:w-[300px] bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 relative flex flex-col ${
                   isHighlighted
-                    ? "border-2 border-teal ring-4 ring-teal/10 scale-105 z-10"
+                    ? "border-2 border-teal ring-4 ring-teal/10 z-10"
                     : "border border-border/30"
                 }`}
               >
                 {doctor.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1 bg-orange text-white text-[10px] font-bold rounded-full shadow-sm uppercase tracking-widest">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1 bg-orange text-white text-[10px] font-bold rounded-full shadow-sm uppercase tracking-widest z-20">
                     <Award className="h-3 w-3" />
                     {doctor.badge}
                   </div>
                 )}
 
                 {/* Photo */}
-                <div className="w-24 h-24 rounded-full mx-auto mb-4 relative overflow-hidden bg-gradient-to-br from-teal to-teal-dark shadow-md">
+                <div className="w-24 h-24 rounded-full mx-auto mb-4 relative overflow-hidden bg-gradient-to-br from-teal to-teal-dark shadow-md shrink-0">
                   {doctor.image ? (
                     <Image
                       src={imageUrl}
@@ -124,19 +124,21 @@ export function ExpertDoctors({
                   )}
                 </div>
 
-                <h3 className="font-heading text-lg font-bold text-text-dark mb-1">
-                  {doctor.name}
-                </h3>
-                <p className="text-sm text-teal font-medium mb-2">
-                  {doctor.qualification}
-                </p>
-                <div className="flex items-center justify-center gap-1.5 text-xs text-text-muted mb-3">
-                  <Stethoscope className="h-3.5 w-3.5 text-teal" />
-                  {doctor.experience}
+                <div className="flex-1 flex flex-col justify-start">
+                  <h3 className="font-heading text-lg font-bold text-text-dark mb-1">
+                    {doctor.name}
+                  </h3>
+                  <p className="text-sm text-teal font-medium mb-2">
+                    {doctor.qualification}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 text-xs text-text-muted mb-3">
+                    <Stethoscope className="h-3.5 w-3.5 text-teal shrink-0" />
+                    <span>{doctor.experience}</span>
+                  </div>
                 </div>
                 
                 {(doctor.linkedin || doctor.twitter || doctor.instagram) && (
-                  <div className="flex items-center justify-center gap-3 mt-2 border-t border-border/30 pt-3">
+                  <div className="flex items-center justify-center gap-3 mt-auto border-t border-border/30 pt-3">
                     {doctor.linkedin && (
                       <a href={doctor.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-teal transition-colors">
                         <LinkedinIcon className="w-4 h-4" />

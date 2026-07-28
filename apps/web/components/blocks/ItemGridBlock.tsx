@@ -84,7 +84,7 @@ export function ItemGridBlock({
                   {item.link && (
                     <Link
                       href={item.link}
-                      className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center shadow-sm shadow-orange-500/20 transition-colors"
+                      className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-orange hover:bg-orange-hover text-white flex items-center justify-center shadow-sm transition-colors"
                       aria-label={`Learn more about ${item.title}`}
                     >
                       <ChevronRight className="w-5 h-5" />

@@ -1,52 +1,52 @@
-'use client'
+"use client";
 
-import { Play, BadgeCheck } from 'lucide-react'
-import Image from 'next/image'
-import useEmblaCarousel from 'embla-carousel-react'
-import type { DoctorReel } from '@healdoor/types'
-import { getMediaUrl } from '@healdoor/utils'
+import { Play, BadgeCheck } from "lucide-react";
+import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
+import type { DoctorReel } from "@healdoor/types";
+import { getMediaUrl } from "@healdoor/utils";
 
 const defaultDoctorReels: Partial<DoctorReel>[] = [
   {
-    doctorName: 'Dr. Rahul Verma',
-    description: 'Learn about the importance of regular health checkups.',
-    instagramLink: '#',
+    doctorName: "Dr. Rahul Verma",
+    description: "Learn about the importance of regular health checkups.",
+    instagramLink: "#",
     isVerified: true,
   },
   {
-    doctorName: 'Dr. Priya Sharma',
-    description: '5 tips for maintaining a healthy lifestyle.',
-    instagramLink: '#',
+    doctorName: "Dr. Priya Sharma",
+    description: "5 tips for maintaining a healthy lifestyle.",
+    instagramLink: "#",
     isVerified: true,
   },
   {
-    doctorName: 'Dr. Shubham Mangla',
-    description: 'Understanding common respiratory issues.',
-    instagramLink: '#',
+    doctorName: "Dr. Shubham Mangla",
+    description: "Understanding common respiratory issues.",
+    instagramLink: "#",
     isVerified: true,
   },
-]
+];
 
 const videoFallbackImages = [
-  '/images/service-oxygen.png',
-  '/images/service-oxygen.png',
-  '/images/service-oxygen.png',
-]
+  "/images/doctor-rahul.png",
+  "/images/doctor-priya.png",
+  "/images/doctor-shubham.png",
+];
 
 interface DoctorReelsSectionProps {
-  heading?: string | null
-  description?: string | null
-  reels?: DoctorReel[]
+  heading?: string | null;
+  description?: string | null;
+  reels?: DoctorReel[];
 }
 
 export function DoctorReelsSection({
-  heading = 'Doctor Reels',
-  description = 'Reels of doctors we have currently with us.',
+  heading = "Doctor Reels",
+  description = "Reels of doctors we have currently with us.",
   reels,
 }: DoctorReelsSectionProps) {
-  const [videoEmblaRef] = useEmblaCarousel({ loop: false, align: 'center' })
+  const [videoEmblaRef] = useEmblaCarousel({ loop: false, align: "start" });
 
-  const doctorReels = reels && reels.length > 0 ? reels : defaultDoctorReels
+  const doctorReels = reels && reels.length > 0 ? reels : defaultDoctorReels;
 
   return (
     <section id="doctor-reels" className="section-padding bg-white">
@@ -63,33 +63,22 @@ export function DoctorReelsSection({
         {/* Video Reels */}
         {doctorReels.length > 0 && (
           <div className="overflow-hidden -mx-4 px-4 mb-8" ref={videoEmblaRef}>
-            <div className="flex -ml-4 justify-center">
+            <div className="flex -ml-4 md:justify-center">
               {doctorReels.map((t, index) => {
                 const thumbUrl =
-                  getMediaUrl(
-                    t.thumbnail as Parameters<typeof getMediaUrl>[0],
-                  ) ||
+                  getMediaUrl(t.thumbnail as Parameters<typeof getMediaUrl>[0]) ||
                   videoFallbackImages[index] ||
-                  '/images/service-oxygen.png'
+                  "/images/service-medical.png";
 
-                const videoUrl = getMediaUrl(
-                  t.videoFile as Parameters<typeof getMediaUrl>[0],
-                )
-                const cardLink = t.instagramLink
-                const CardWrapper = cardLink ? 'a' : 'div'
+                const videoUrl = getMediaUrl(t.videoFile as Parameters<typeof getMediaUrl>[0]);
+                const cardLink = t.instagramLink;
+                const CardWrapper = cardLink ? "a" : "div";
                 const cardProps = cardLink
-                  ? {
-                      href: cardLink,
-                      target: '_blank',
-                      rel: 'noopener noreferrer',
-                    }
-                  : {}
+                  ? { href: cardLink, target: "_blank", rel: "noopener noreferrer" }
+                  : {};
 
                 return (
-                  <div
-                    key={(t as DoctorReel).id || t.doctorName || index}
-                    className="flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_30%] lg:flex-[0_0_22%] min-w-0 pl-4"
-                  >
+                  <div key={(t as DoctorReel).id || t.doctorName || index} className="flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_30%] lg:flex-[0_0_22%] min-w-0 pl-4">
                     <CardWrapper
                       {...cardProps}
                       className="block relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer h-full"
@@ -125,11 +114,7 @@ export function DoctorReelsSection({
                       {/* Share/reel icon */}
                       <div className="absolute top-3 right-3 pointer-events-none">
                         <div className="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                          <svg
-                            className="h-3.5 w-3.5 text-white"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                          >
+                          <svg className="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
@@ -151,12 +136,12 @@ export function DoctorReelsSection({
                       </div>
                     </CardWrapper>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
         )}
       </div>
     </section>
-  )
+  );
 }

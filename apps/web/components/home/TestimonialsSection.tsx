@@ -106,7 +106,7 @@ export function TestimonialsSection({
         {/* Video testimonials */}
         {videoTestimonials.length > 0 && (
           <div className="overflow-hidden -mx-4 px-4 mb-8" ref={videoEmblaRef}>
-            <div className="flex -ml-4">
+            <div className="flex -ml-4 md:justify-center">
               {videoTestimonials.map((t, index) => {
                 const thumbUrl =
                   getMediaUrl(t.image as Parameters<typeof getMediaUrl>[0]) ||
@@ -121,7 +121,7 @@ export function TestimonialsSection({
                   : {};
 
                 return (
-                  <div key={(t as Testimonial).id || t.handle || index} className="flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_30%] lg:flex-[0_0_22%] min-w-0 pl-4">
+                  <div key={(t as Testimonial).id || t.handle || index} className="flex-[0_0_80%] sm:flex-[0_0_45%] md:flex-[0_0_24%] lg:flex-[0_0_22%] min-w-0 pl-4">
                     <CardWrapper
                       {...cardProps}
                       className="block relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer h-full"
@@ -188,7 +188,7 @@ export function TestimonialsSection({
         {/* Written testimonials */}
         {writtenTestimonials.length > 0 && (
           <div className="overflow-hidden -mx-4 px-4 max-w-5xl mx-auto" ref={writtenEmblaRef}>
-            <div className="flex -ml-6">
+            <div className="flex -ml-6 md:justify-center">
               {writtenTestimonials.map((t, index) => {
                 const initials = (t.name || "")
                   .split(" ")

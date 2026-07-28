@@ -205,3 +205,101 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* ── Hero Carousel ── */
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes hero-stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes hero-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(35, 158, 163, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(35, 158, 163, 0); }
+}
+
+.hero-float {
+  animation: hero-float 4s ease-in-out infinite;
+}
+
+.hero-float-delayed {
+  animation: hero-float 5s ease-in-out 1s infinite;
+}
+
+.hero-stagger-1 { animation: hero-stagger-in 0.5s ease-out 0.1s both; }
+.hero-stagger-2 { animation: hero-stagger-in 0.5s ease-out 0.25s both; }
+.hero-stagger-3 { animation: hero-stagger-in 0.5s ease-out 0.4s both; }
+.hero-stagger-4 { animation: hero-stagger-in 0.5s ease-out 0.55s both; }
+
+.hero-badge-pulse {
+  animation: hero-badge-pulse 2.5s ease-in-out infinite;
+}
+
+/* Mobile hero gradient overlay */
+.hero-gradient-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.50) 30%,
+    rgba(0, 0, 0, 0.15) 60%,
+    transparent 100%
+  );
+}
+
+/* Hero progress dot */
+.hero-progress-dot {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-progress-dot.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--teal);
+  border-radius: inherit;
+  animation: progress-fill 5s linear forwards;
+}
+
+/* Embla carousel base */
+.hero-embla { overflow: hidden; }
+.hero-embla__container { display: flex; }
+.hero-embla__slide { flex: 0 0 100%; min-width: 0; }
+
+/* Desktop hero cross-fade */
+.hero-desktop-embla .hero-embla__container {
+  /* Override flex for opacity-based transition on desktop */
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-float,
+  .hero-float-delayed,
+  .hero-stagger-1,
+  .hero-stagger-2,
+  .hero-stagger-3,
+  .hero-stagger-4,
+  .hero-badge-pulse {
+    animation: none !important;
+  }
+  .hero-progress-dot.active::after {
+    animation: none !important;
+    width: 100%;
+  }
+}

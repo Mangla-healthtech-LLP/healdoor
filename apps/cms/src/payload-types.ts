@@ -252,6 +252,10 @@ export interface Service {
             sectionDescription?: string | null;
             plans: {
               title: string;
+              /**
+               * Label above the price, e.g. "Starting from"
+               */
+              subtitle?: string | null;
               price: string;
               /**
                * E.g., /month or one-time
@@ -295,6 +299,41 @@ export interface Service {
             id?: string | null;
             blockName?: string | null;
             blockType: 'itemGrid';
+          }
+        | {
+            /**
+             * Name of the clinic
+             */
+            clinicName?: string | null;
+            address?: string | null;
+            /**
+             * Clinic operating hours
+             */
+            timings?: string | null;
+            /**
+             * Reception phone number
+             */
+            receptionPhone?: string | null;
+            /**
+             * Enquiry phone number
+             */
+            enquiryPhone?: string | null;
+            /**
+             * List of facilities/services available at the clinic
+             */
+            facilities?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Google Maps embed URL (iframe src)
+             */
+            mapEmbedUrl?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'clinicInfo';
           }
       )[]
     | null;
@@ -609,6 +648,10 @@ export interface Page {
             sectionDescription?: string | null;
             plans: {
               title: string;
+              /**
+               * Label above the price, e.g. "Starting from"
+               */
+              subtitle?: string | null;
               price: string;
               /**
                * E.g., /month or one-time
@@ -652,6 +695,41 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'itemGrid';
+          }
+        | {
+            /**
+             * Name of the clinic
+             */
+            clinicName?: string | null;
+            address?: string | null;
+            /**
+             * Clinic operating hours
+             */
+            timings?: string | null;
+            /**
+             * Reception phone number
+             */
+            receptionPhone?: string | null;
+            /**
+             * Enquiry phone number
+             */
+            enquiryPhone?: string | null;
+            /**
+             * List of facilities/services available at the clinic
+             */
+            facilities?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Google Maps embed URL (iframe src)
+             */
+            mapEmbedUrl?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'clinicInfo';
           }
       )[]
     | null;
@@ -985,6 +1063,7 @@ export interface ServicesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    subtitle?: T;
                     price?: T;
                     billingPeriod?: T;
                     isPopular?: T;
@@ -1016,6 +1095,24 @@ export interface ServicesSelect<T extends boolean = true> {
                     link?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        clinicInfo?:
+          | T
+          | {
+              clinicName?: T;
+              address?: T;
+              timings?: T;
+              receptionPhone?: T;
+              enquiryPhone?: T;
+              facilities?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              mapEmbedUrl?: T;
               id?: T;
               blockName?: T;
             };
@@ -1199,6 +1296,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    subtitle?: T;
                     price?: T;
                     billingPeriod?: T;
                     isPopular?: T;
@@ -1230,6 +1328,24 @@ export interface PagesSelect<T extends boolean = true> {
                     link?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        clinicInfo?:
+          | T
+          | {
+              clinicName?: T;
+              address?: T;
+              timings?: T;
+              receptionPhone?: T;
+              enquiryPhone?: T;
+              facilities?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              mapEmbedUrl?: T;
               id?: T;
               blockName?: T;
             };
@@ -1427,6 +1543,8 @@ export interface HomepageSetting {
           | null;
         ctaText?: string | null;
         ctaHref?: string | null;
+        secondaryCtaText?: string | null;
+        secondaryCtaHref?: string | null;
         image?: (number | null) | Media;
         /**
          * Top line of quality badge (e.g. "BEST QUALITY")
@@ -1658,6 +1776,8 @@ export interface HomepageSettingsSelect<T extends boolean = true> {
             };
         ctaText?: T;
         ctaHref?: T;
+        secondaryCtaText?: T;
+        secondaryCtaHref?: T;
         image?: T;
         qualityBadgeLine1?: T;
         qualityBadgeLine2?: T;

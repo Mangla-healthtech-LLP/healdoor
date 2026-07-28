@@ -44,6 +44,14 @@ export const HomepageSettings: GlobalConfig = {
           type: 'text',
         },
         {
+          name: 'secondaryCtaText',
+          type: 'text',
+        },
+        {
+          name: 'secondaryCtaHref',
+          type: 'text',
+        },
+        {
           name: 'image',
           type: 'upload',
           relationTo: 'media',
@@ -285,24 +293,6 @@ export const HomepageSettings: GlobalConfig = {
       ],
     },
 
-      // ── Doctor Reels Section ──
-    {
-      name: 'doctorReelsSection',
-      type: 'group',
-      fields: [
-        {
-          name: 'heading',
-          type: 'text',
-          defaultValue: 'Doctor Reels',
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          defaultValue: 'Reels of doctors we have currently with us.',
-        },
-      ],
-    },
-
     // ── Testimonials Section ──
     {
       name: 'testimonialsSection',
@@ -317,6 +307,24 @@ export const HomepageSettings: GlobalConfig = {
           name: 'description',
           type: 'textarea',
           defaultValue: 'Real stories from real people who chose HealDoor.',
+        },
+      ],
+    },
+
+    // ── Doctor Reels Section ──
+    {
+      name: 'doctorReelsSection',
+      type: 'group',
+      fields: [
+        {
+          name: 'heading',
+          type: 'text',
+          defaultValue: 'Doctor Reels',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue: 'Reels of doctors we have currently with us.',
         },
       ],
     },

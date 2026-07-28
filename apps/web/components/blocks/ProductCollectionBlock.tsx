@@ -49,14 +49,12 @@ export async function ProductCollectionBlock({
     
     if (Array.isArray(product.category)) {
       return product.category.some((c: { slug?: string; id?: string } | string) => {
-        const categoryId =
-          typeof c === 'string'
-            ? c
-            : c && typeof c === 'object'
-            ? c.slug || c.id
-            : undefined
-
-        return categoryId ? selectedCategoryValues.includes(categoryId) : false
+        if (typeof c === 'string') return selectedCategoryValues.includes(c)
+        if (c && typeof c === 'object') {
+          const val = c.slug || c.id
+          return val ? selectedCategoryValues.includes(val) : false
+        }
+        return false
       })
     }
     // Backward compatibility for old string category
