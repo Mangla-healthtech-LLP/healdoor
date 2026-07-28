@@ -128,6 +128,8 @@ export interface HeroSlide {
   bullets?: { text: string; id?: string | null }[]
   ctaText?: string | null
   ctaHref?: string | null
+  secondaryCtaText?: string | null
+  secondaryCtaHref?: string | null
   image?: MediaItem | number | null
   qualityBadgeLine1?: string | null
   qualityBadgeLine2?: string | null

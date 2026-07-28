@@ -9,13 +9,21 @@ const headers: Record<string, string> = {
 }
 
 async function fetchPayload<T>(endpoint: string, options?: RequestInit & { next?: { revalidate?: number } }): Promise<T> {
-  const res = await fetch(`${CMS_URL}/api${endpoint}`, {
-    headers,
-    next: { revalidate: 60 }, // ISR: revalidate every 60s
-    ...options,
-  } as any)
-  if (!res.ok) throw new Error(`Payload API error: ${res.status} ${res.statusText}`)
-  return res.json()
+  try {
+    const res = await fetch(`${CMS_URL}/api${endpoint}`, {
+      headers,
+      next: { revalidate: 60 }, // ISR: revalidate every 60s
+      ...options,
+    } as any)
+    if (!res.ok) {
+      console.warn(`Payload API warning: ${res.status} ${res.statusText} for ${endpoint}`)
+      return { docs: [], totalDocs: 0, totalPages: 0, page: 1, limit: 100, hasNextPage: false, hasPrevPage: false, pagingCounter: 0 } as unknown as T
+    }
+    return await res.json()
+  } catch (error) {
+    console.warn(`Payload API unreachable (${endpoint}):`, (error as Error).message)
+    return { docs: [], totalDocs: 0, totalPages: 0, page: 1, limit: 100, hasNextPage: false, hasPrevPage: false, pagingCounter: 0 } as unknown as T
+  }
 }
 
 // Pages
