@@ -64,7 +64,7 @@ const socialLinks = [
   { icon: FacebookIcon, href: "https://facebook.com/healdoor", label: "Facebook" },
   {
     icon: InstagramIcon,
-    href: "https://instagram.com/healdoor",
+    href: "https://www.instagram.com/heal_door?igsh=MXFpMmQxemZva3BkcA==",
     label: "Instagram",
   },
   {
@@ -73,7 +73,7 @@ const socialLinks = [
     label: "WhatsApp",
   },
   // { icon: YoutubeIcon, href: "https://youtube.com/@healdoor", label: "YouTube" },
-  { icon: LinkedinIcon, href: "https://linkedin.com/company/healdoor", label: "LinkedIn" },
+  { icon: LinkedinIcon, href: "https://www.linkedin.com/company/heal-door/", label: "LinkedIn" },
 ];
 
 export function Footer() {
