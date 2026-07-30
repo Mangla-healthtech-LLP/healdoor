@@ -40,8 +40,8 @@ const serviceTabs = [
     icon: BedDouble,
   },
   {
-    title: "Other Medical Equipments",
-    href: "/products",
+    title: "Disease Prevention Programmes",
+    href: "/disease-prevention",
     icon: Stethoscope,
   },
 ];
