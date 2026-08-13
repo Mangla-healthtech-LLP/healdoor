@@ -18,7 +18,7 @@ const servicesDropdown = [
   { label: 'Doctor Consultation', href: '/doctor-consultation' },
   { label: 'Disease Prevention Programmes', href: '/disease-prevention' },
   { label: 'ICU setup at Home', href: '/icu-at-home' },
-  { label: 'Blood tests at Home', href: '/services/investigations-at-home' },
+  { label: 'Blood tests at Home', href: '/investigations-at-home' },
 ]
 
 const equipmentsDropdown = [
