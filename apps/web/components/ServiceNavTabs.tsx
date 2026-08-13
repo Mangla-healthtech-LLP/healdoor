@@ -26,7 +26,7 @@ const serviceTabs = [
   },
   {
     title: "Investigation at Home",
-    href: "/services/investigations-at-home",
+    href: "/investigations-at-home",
     icon: Microscope,
   },
   {
