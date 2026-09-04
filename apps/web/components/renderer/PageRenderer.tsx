@@ -14,6 +14,7 @@ import {
   PricingGridBlock,
   ItemGridBlock,
   ClinicInfoBlock,
+  ServiceItemGridBlock,
 } from '@/components/blocks'
 
 // Map block types to their React components
@@ -32,6 +33,7 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
   pricingGrid: PricingGridBlock,
   itemGrid: ItemGridBlock,
   clinicInfo: ClinicInfoBlock,
+  serviceItemGrid: ServiceItemGridBlock,
 }
 
 interface PageRendererProps {

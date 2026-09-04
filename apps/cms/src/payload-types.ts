@@ -74,9 +74,9 @@ export interface Config {
     pages: Page;
     blogs: Blog;
     testimonials: Testimonial;
-    'doctor-reels': DoctorReel;
     faqs: Faq;
     products: Product;
+    'doctor-reels': DoctorReel;
     'product-categories': ProductCategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -92,9 +92,9 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
-    'doctor-reels': DoctorReelsSelect<false> | DoctorReelsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    'doctor-reels': DoctorReelsSelect<false> | DoctorReelsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -334,6 +334,28 @@ export interface Service {
             id?: string | null;
             blockName?: string | null;
             blockType: 'clinicInfo';
+          }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            columns?: ('1' | '2' | '3' | '4') | null;
+            items: {
+              image: number | Media;
+              title: string;
+              description?: string | null;
+              /**
+               * Link URL (e.g., /physiotherapy/at-home)
+               */
+              link?: string | null;
+              /**
+               * Check to show "Coming Soon" badge and styling
+               */
+              upcoming?: boolean | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'serviceItemGrid';
           }
       )[]
     | null;
@@ -731,6 +753,28 @@ export interface Page {
             blockName?: string | null;
             blockType: 'clinicInfo';
           }
+        | {
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            columns?: ('1' | '2' | '3' | '4') | null;
+            items: {
+              image: number | Media;
+              title: string;
+              description?: string | null;
+              /**
+               * Link URL (e.g., /physiotherapy/at-home)
+               */
+              link?: string | null;
+              /**
+               * Check to show "Coming Soon" badge and styling
+               */
+              upcoming?: boolean | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'serviceItemGrid';
+          }
       )[]
     | null;
   seo?: {
@@ -906,16 +950,16 @@ export interface PayloadLockedDocument {
         value: number | Testimonial;
       } | null)
     | ({
-        relationTo: 'doctor-reels';
-        value: number | DoctorReel;
-      } | null)
-    | ({
         relationTo: 'faqs';
         value: number | Faq;
       } | null)
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'doctor-reels';
+        value: number | DoctorReel;
       } | null)
     | ({
         relationTo: 'product-categories';
@@ -1113,6 +1157,25 @@ export interface ServicesSelect<T extends boolean = true> {
                     id?: T;
                   };
               mapEmbedUrl?: T;
+              id?: T;
+              blockName?: T;
+            };
+        serviceItemGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    description?: T;
+                    link?: T;
+                    upcoming?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -1349,6 +1412,25 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        serviceItemGrid?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDescription?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    description?: T;
+                    link?: T;
+                    upcoming?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   seo?:
     | T
@@ -1409,20 +1491,6 @@ export interface TestimonialsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "doctor-reels_select".
- */
-export interface DoctorReelsSelect<T extends boolean = true> {
-  doctorName?: T;
-  thumbnail?: T;
-  videoFile?: T;
-  description?: T;
-  instagramLink?: T;
-  isVerified?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faqs_select".
  */
 export interface FaqsSelect<T extends boolean = true> {
@@ -1469,6 +1537,20 @@ export interface ProductsSelect<T extends boolean = true> {
         description?: T;
         canonical?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctor-reels_select".
+ */
+export interface DoctorReelsSelect<T extends boolean = true> {
+  doctorName?: T;
+  thumbnail?: T;
+  videoFile?: T;
+  description?: T;
+  instagramLink?: T;
+  isVerified?: T;
   updatedAt?: T;
   createdAt?: T;
 }

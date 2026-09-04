@@ -143,6 +143,23 @@ export interface ItemGridBlockData {
   }[]
 }
 
+export interface ServiceItemGridBlockData {
+  blockType: 'serviceItemGrid'
+  id?: string
+  sectionTitle?: string | null
+  sectionDescription?: string | null
+  columns?: '1' | '2' | '3' | '4' | null
+  items: {
+    title: string
+    description?: string | null
+    image: MediaItem | number
+    link?: string | null
+    href?: string | null
+    upcoming?: boolean | null
+    id?: string | null
+  }[]
+}
+
 export interface ClinicInfoBlockData {
   blockType: 'clinicInfo'
   id?: string
@@ -170,5 +187,7 @@ export type LayoutBlock =
   | DoctorGridBlockData
   | PricingGridBlockData
   | ItemGridBlockData
+  | ServiceItemGridBlockData
   | ClinicInfoBlockData
+
 
